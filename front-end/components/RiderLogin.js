@@ -30,7 +30,7 @@ export function RiderLogin() {
         await AsyncStorage.setItem("LoggedRider", JSON.stringify(rider));
         await AsyncStorage.setItem("riderToken", JSON.stringify(riderToken));
         console.log("บันทึกข้อมูล Rider สำเร็จ");
-        navigation.navigate('MainRider')
+        navigation.navigate("MainRider");
       } else {
         return;
       }
@@ -42,9 +42,9 @@ export function RiderLogin() {
   };
   return (
     <View style={myStyle.container}>
-        <Text style={myStyle.topic}>ล็อคอินสำหรับวิน</Text>
+      <Text style={myStyle.topic}>ล็อคอินสำหรับวิน</Text>
 
-      {invalid && <Text style={{color:'red'}}>{errorAlert}</Text>}
+      {invalid && <Text style={{ color: "red" }}>{errorAlert}</Text>}
       <TextInput
         style={myStyle.input}
         placeholder="ชื่อผู้ใช้งาน"
@@ -58,6 +58,17 @@ export function RiderLogin() {
       ></TextInput>
       <TouchableOpacity style={myStyle.button} onPress={riderLogin}>
         <Text style={myStyle.buttonLogin}>ล็อคอิน</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("RiderRegister")}>
+        <Text
+          style={{
+            fontWeight: "bold",
+            alignSelf: "center",
+            position: "absolute",
+            marginTop: 120,
+            color: "black",
+          }}
+        >สมัครบัญชีใช้งานสำหรับวินมอเตอร์ไซค์</Text>
       </TouchableOpacity>
     </View>
   );

@@ -16,6 +16,8 @@ import { EditRiderProfile } from './components/EditRiderProfile';
 import RealtimeScreen from './components/RealtimeTest';
 import { Summary } from './components/Summary';
 import { RiderSummary } from './components/RiderSummary';
+import { RiderRegister } from './components/RiderRegister';
+import { RiderRegister2 } from './components/RiderRegister2';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +39,8 @@ export default function App(){
            <Stack.Screen name='Test' component={RealtimeScreen} options={{headerTitle:''}}></Stack.Screen>
            <Stack.Screen name='Summary' component={Summary} options={{headerShown:false}}></Stack.Screen>
            <Stack.Screen name='RiderSummary' component={RiderSummary} options={{headerShown:false}}></Stack.Screen>
+           <Stack.Screen name='RiderRegister' component={RiderRegister} options={{headerTitle:''}}></Stack.Screen>
+           <Stack.Screen name='RiderRegister2' component={RiderRegister2} options={{headerTitle:''}}></Stack.Screen>
         </Stack.Navigator>
      </NavigationContainer>
     

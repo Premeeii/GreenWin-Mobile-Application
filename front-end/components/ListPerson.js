@@ -86,8 +86,8 @@ export function ListPerson() {
       const dropdownRider = json.map((item) => ({
         label: `${item.riderLocation}`,
         value: item.riderLocation,
-        disable1: item.availableRider === 0,
-        disabled: item.availableRider !== 0,
+        disabled: item.availableRider === 0,
+        ready: item.availableRider !== 0,
       }));
       setDropdownRiders(dropdownRider);
     } catch (error) {
@@ -191,21 +191,19 @@ export function ListPerson() {
     }
   }, [isFocus]);
 
-  useEffect(
-    () => {
-      //สำหรับเมื่อเลือกpickupName 1 แล้ว จะดึงข้อมูล pickupName2 จาก pickupName1ที่เลือก
-      if (selectLocation1) {
-        const filter = location
-          .filter((item) => item.pickupName1 === selectLocation1) //คัดกลองข้อมูลจากที่เลือกpickupName1
-          .map((item) => ({
-            label: item.pickupName2,
-            value: item.pickupName2,
-          }));
-        console.log("Filtered pickupName2:", filter);
-        setDropdownItems2(filter);
-      }
-    },
-    [selectLocation1, location]);
+  useEffect(() => {
+    //สำหรับเมื่อเลือกpickupName 1 แล้ว จะดึงข้อมูล pickupName2 จาก pickupName1ที่เลือก
+    if (selectLocation1) {
+      const filter = location
+        .filter((item) => item.pickupName1 === selectLocation1) //คัดกลองข้อมูลจากที่เลือกpickupName1
+        .map((item) => ({
+          label: item.pickupName2,
+          value: item.pickupName2,
+        }));
+      console.log("Filtered pickupName2:", filter);
+      setDropdownItems2(filter);
+    }
+  }, [selectLocation1, location]);
 
   useEffect(() => {
     const socket = new SockJS("http://10.0.2.2:8080/ws");
@@ -215,7 +213,7 @@ export function ListPerson() {
       onConnect: () => {
         console.log("Connected to WebSocket");
 
-        stompClient.subscribe("/topic/addriderLocation", (message) => {
+        stompClient.subscribe("/topic/riderLocation", (message) => {
           const updatedRider = JSON.parse(message.body);
           console.log("RiderLocationUpdate", updatedRider);
           setDropdownRiders((prev) =>
@@ -223,8 +221,8 @@ export function ListPerson() {
               item.value === updatedRider.riderLocation
                 ? {
                     ...item,
-                    disable1: updatedRider.availableRider === 0,
-                    availableRider: updatedRider.availableRider,
+                    ready: updatedRider.availableRider !== 0,
+                    disabled: updatedRider.availableRider === 0,
                   }
                 : item
             )
@@ -353,16 +351,18 @@ export function ListPerson() {
           maxHeight={200}
           value={selectRider}
           onChange={(item) => {
-            setSelectRider(item.value);
+            if (!item.disabled) {
+              setSelectRider(item.value);
+            }
           }}
           renderItem={(item) => (
             <TouchableOpacity
-              disabled={item.disabled}
+              disabled={item.ready}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
                 padding: 15,
-                opacity: item.disable1 ? 0.4 : 1,
+                opacity: item.disabled ? 0.4 : 1,
               }}
             >
               <Text>{item.label}</Text>

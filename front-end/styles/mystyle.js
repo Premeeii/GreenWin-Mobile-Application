@@ -314,4 +314,64 @@ export const myStyle = StyleSheet.create({
     backgroundColor: "#F8F8F8",
     alignItems: "center",
   },
+
+  //new-firstpage
+  newcontainer: {
+    flex: 1,
+    backgroundColor: "#E3F5E8",
+  },
+  headerTextWrap: {
+    marginLeft: 45, // as a Motorcycle Taxi Driver
+    marginTop: 100,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: '900',
+    color: "#2B1845",
+    letterSpacing: 2,
+  },
+  subtitle: {
+    marginTop: -2,
+    fontSize: 18,
+    fontWeight: '400',
+    color: "#3A2852",
+    opacity: 0.8,
+  },
+  topImage: {
+    width: "100%",
+    height: "70%",
+  },
+  bottomContainer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: 504, 
+    zIndex: 10, 
+  },
+  bottomImage: {
+    width: "100%",
+    height: "100%",
+  },
+  riderWrap: {
+  flexDirection: "row",      // ให้ข้อความอยู่บรรทัดเดียว
+  justifyContent: "center",  // ให้อยู่ตรงกลางจอ
+  alignItems: "center",
+  position: "absolute",
+  bottom: 60,
+  width: "100%",              // ให้กินเต็มจอ เพื่อจัดกลางได้
+  zIndex: 30,
+  },
+  rider: {
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+    color: "white",
+    fontSize: 14,
+  },
+  text: {
+  fontWeight: "500",
+  color: "white",
+  fontSize: 14,
+  },
 });
+
+

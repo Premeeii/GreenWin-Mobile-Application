@@ -4,19 +4,33 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  Animated, 
+  Dimensions,
 } from "react-native";
 import { myStyle } from "../styles/mystyle";
 import { useNavigation } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { jwtDecode } from "jwt-decode";
 import { ListPerson } from "./ListPerson";
 import { MainRider } from "./MainRider";
 
+const { height } = Dimensions.get("window");
+
 export function FirstPage() {
   const navigation = useNavigation();
   const [user, setUser] = useState(null);
   const [rider, setRider] = useState(null);
+
+  const slideAnim = useRef(new Animated.Value(height * 0.9)).current;
+
+  useEffect(() => {
+    Animated.timing(slideAnim, {
+      toValue: 0, // ขยับขึ้นมา
+      duration: 1500,
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   useEffect(() => {
     const loadUser = async () => {
