@@ -37,6 +37,10 @@ public class  RiderLocationService {
         return riderLocationRepository.save(rl);
     }
 
+    public List<RiderLocation> getAllRiders(){
+        return riderLocationRepository.findAll();
+    }
+
 
 
     

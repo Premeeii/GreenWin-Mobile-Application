@@ -25,12 +25,14 @@ import dev.kittpas.greenwin.Entity.Person;
 import dev.kittpas.greenwin.Entity.Request;
 import dev.kittpas.greenwin.Entity.Rider;
 import dev.kittpas.greenwin.Entity.RiderLocation;
+import dev.kittpas.greenwin.Entity.RiderRegister;
 import dev.kittpas.greenwin.Entity.Summary;
 import dev.kittpas.greenwin.Service.HistoryService;
 import dev.kittpas.greenwin.Service.LocationService;
 import dev.kittpas.greenwin.Service.PersonService;
 import dev.kittpas.greenwin.Service.RequestService;
 import dev.kittpas.greenwin.Service.RiderLocationService;
+import dev.kittpas.greenwin.Service.RiderRegisterService;
 import dev.kittpas.greenwin.Service.RiderService;
 import dev.kittpas.greenwin.Service.SummaryService;
 import dev.kittpas.greenwin.config.JwtUtil;
@@ -62,6 +64,8 @@ public class MyController {
     private SummaryService summaryService;
     @Autowired
     private HistoryService historyService;
+    @Autowired
+    private RiderRegisterService riderRegisterService;
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
     @Autowired
@@ -101,12 +105,12 @@ public class MyController {
         Optional<Person> personOp = personService.loginPerson(username);
 
         if (personOp.isPresent()) { // เช็คว่ามีค่านั้นหรือป่าว
-            Person person = personOp.get(); 
+            Person person = personOp.get();
 
             if (BCrypt.checkpw(password, person.getPassword())) { // ตรวจสอบรหัส
-                
+
                 SentLoginDataRequest dto = new SentLoginDataRequest(person);
-    
+
                 Map<String, Object> claims = new HashMap<>();
                 claims.put("username", person.getUsername());
                 claims.put("fname", person.getFname());
@@ -228,24 +232,24 @@ public class MyController {
         simpMessagingTemplate.convertAndSend("/topic/delete-summary", customerUsername);
         summaryService.deleteSummary(customerUsername);
         requestService.deleteRequest(customerUsername);
+        
     }
 
     @PostMapping("available/{riderLocation}")
-    public RiderLocation availableRider(@PathVariable String riderLocation){
+    public RiderLocation availableRider(@PathVariable String riderLocation) {
         RiderLocation updatedRider = riderLocationService.riderAvailable(riderLocation);
 
-        simpMessagingTemplate.convertAndSend("/topic/addriderLocation", updatedRider);
+        simpMessagingTemplate.convertAndSend("/topic/riderLocation", updatedRider);
         return updatedRider;
     }
 
     @PostMapping("unavailable/{riderLocation}")
-    public RiderLocation unavailableRider(@PathVariable String riderLocation){
+    public RiderLocation unavailableRider(@PathVariable String riderLocation) {
         RiderLocation updatedRider = riderLocationService.riderUnavailable(riderLocation);
-        
-        simpMessagingTemplate.convertAndSend("/topic/outriderLocation", updatedRider);
+
+        simpMessagingTemplate.convertAndSend("/topic/riderLocation", updatedRider);
         return updatedRider;
     }
-
 
     // Test Jwt
     @PostMapping("/testjwt")
@@ -262,7 +266,7 @@ public class MyController {
                 claims.put("fname", person.getFname());
                 claims.put("lname", person.getLname());
                 claims.put("tel", person.getTel());
-                
+
                 String accessToken = jwtUtil.generateAccessToken(person.getUsername(), claims);
 
                 String refreshToken = jwtUtil.generateRefreshToken(person.getUsername());
@@ -277,11 +281,20 @@ public class MyController {
         return ResponseEntity.status(404).body("User not found");
     }
 
-    //History
+    // History
     @PostMapping("/addhistory")
-    public History addHistory(@RequestBody History history){
-        
+    public History addHistory(@RequestBody History history) {
+        List<RiderLocation> riders = riderLocationService.getAllRiders();
+        simpMessagingTemplate.convertAndSend("/topic/riderLocation", riders);
+
         return historyService.addHistory(history);
     }
+
+    //RiderRegister
+    @PostMapping("riderregister")
+    public RiderRegister riderRegister(@RequestBody RiderRegister riderRegister){
+        return riderRegisterService.addriderRegister(riderRegister);
+    }
+    
 
 }
