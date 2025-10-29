@@ -6,6 +6,7 @@ import {
   TextInput,
   Alert,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { myStyle } from "../styles/mystyle";
 import { useNavigation } from "@react-navigation/native";
@@ -40,7 +41,8 @@ export function AddPerson() {
 
       const reg = await response.json();
 
-      if (response.ok) { //ถ้าstatusเป็นOKจะล้างค่า
+      if (response.ok) {
+        //ถ้าstatusเป็นOKจะล้างค่า
         Alert.alert("ลงทะเบียนสำเร็จ");
         setFname("");
         setLname("");
@@ -91,57 +93,66 @@ export function AddPerson() {
   };
 
   return (
-    <View style={{ backgroundColor: "#fff", flex: 1 }}>
-      <Text style={myStyle.texttopic}>สมัครใช้งานผู้ใช้งาน</Text>
-      <View style={myStyle.mainreg}>
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
-          ชื่อจริง
-        </Text>
+    <View style={{ flex: 1 }}>
+      <Image
+        source={require("../assets/backg.png")}
+        style={myStyle.signbottomImage}
+        resizeMode="cover"
+      />
+      <TouchableOpacity onPress={() => navigation.navigate("FirstPage")}>
+        <Image
+          source={require("../assets/iconleft.png")}
+          style={{ width: 30, height: 30, marginTop: 80, marginLeft: 40 }}
+        />
+      </TouchableOpacity>
+      <Text style={myStyle.signtitle}>Sign up</Text>
+      <View style={myStyle.signcontent}>
         <TextInput
-          style={myStyle.inputreg}
+          style={myStyle.signinput}
+          placeholder="First name"
+          placeholderTextColor="#C1C1C1"
           value={fname} //ตั้งค่าdefaultให้เป็นfnameที่ยังไม่ได้แก้
           onChangeText={setFname} //เปลี่ยนค่า
         />
-        <Text style={{ color: "red" }}>{errors.fname}</Text>
+        <Text style={{ color: "red",}}>{errors.fname}</Text>
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
-          นามสกุล
-        </Text>
         <TextInput
-          style={myStyle.inputreg}
+          style={myStyle.signinput}
+          placeholder="Last name"
+          placeholderTextColor="#C1C1C1"
           value={lname}
-          onChangeText={setLname} 
+          onChangeText={setLname}
         />
         {<Text style={{ color: "red" }}>{errors.lname}</Text>}
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
-          ชื่อผู้ใช้งาน
-        </Text>
         <TextInput
-          style={myStyle.inputreg}
+          style={myStyle.signinput}
+          placeholder="Username"
+          placeholderTextColor="#C1C1C1"
           value={username}
           onChangeText={setUsername}
         />
         {<Text style={{ color: "red" }}>{errors.username}</Text>}
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
-          รหัสผ่าน
-        </Text>
         <TextInput
-          style={myStyle.inputreg}
+          style={myStyle.signinput}
+          placeholder="Password"
+          placeholderTextColor="#C1C1C1"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={true}
         />
         {<Text style={{ color: "red" }}>{errors.password}</Text>}
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
-          เบอร์โทร
-        </Text>
-        <TextInput style={myStyle.inputreg} value={tel} onChangeText={setTel} />
+        <TextInput 
+          style={myStyle.signinput}
+          placeholder="Phone"
+          placeholderTextColor="#C1C1C1" 
+          value={tel} 
+          onChangeText={setTel} />
         {<Text style={{ color: "red" }}>{errors.tel}</Text>}
 
-        <TouchableOpacity style={myStyle.button} onPress={handleRegister}>
+        <TouchableOpacity style={myStyle.signcreatebutoon} onPress={handleRegister}>
           <Text style={myStyle.buttonLogin}>ยืนยัน</Text>
         </TouchableOpacity>
       </View>

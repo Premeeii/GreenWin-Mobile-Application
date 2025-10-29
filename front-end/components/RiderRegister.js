@@ -20,6 +20,9 @@ export function RiderRegister() {
   const [errors, setErrors] = useState({});
 
   const handleSaveData = async () => {
+    if(!validate()){
+      return;
+    }
 
     if (
       !personId ||

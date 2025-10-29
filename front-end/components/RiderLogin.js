@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { myStyle } from "../styles/mystyle";
@@ -42,6 +42,7 @@ export function RiderLogin() {
   };
   return (
     <View style={myStyle.container}>
+      
       <Text style={myStyle.topic}>ล็อคอินสำหรับวิน</Text>
 
       {invalid && <Text style={{ color: "red" }}>{errorAlert}</Text>}
@@ -68,7 +69,9 @@ export function RiderLogin() {
             marginTop: 120,
             color: "black",
           }}
-        >สมัครบัญชีใช้งานสำหรับวินมอเตอร์ไซค์</Text>
+        >
+          สมัครบัญชีใช้งานสำหรับวินมอเตอร์ไซค์
+        </Text>
       </TouchableOpacity>
     </View>
   );

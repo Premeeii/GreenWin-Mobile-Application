@@ -27,8 +27,8 @@ export default function App(){
      <NavigationContainer>
         <Stack.Navigator initialRouteName='FirstPage'>
            <Stack.Screen name='FirstPage' component={FirstPage} options={{headerShown:false}}></Stack.Screen>
-           <Stack.Screen name='Login' component={LoginScreen} options={{headerTitle:'',headerShown:true}}></Stack.Screen>
-           <Stack.Screen name='AddPerson' component={AddPerson} options={{headerTitle:'',headerShown:true}}></Stack.Screen>
+           <Stack.Screen name='Login' component={LoginScreen} options={{headerShown:false}}></Stack.Screen>
+           <Stack.Screen name='AddPerson' component={AddPerson} options={{headerTitle:'',headerShown:false}}></Stack.Screen>
            <Stack.Screen name='ListPerson' component={ListPerson} options={{headerShown:false}}></Stack.Screen>
            <Stack.Screen name='EditProfile' component={EditProfile} options={{headerTitle:'',headerShown:true}}></Stack.Screen>
            <Stack.Screen name='Request' component={Request} options={{headerShown:false}}></Stack.Screen>

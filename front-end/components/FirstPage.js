@@ -4,7 +4,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
-  Animated, 
+  Animated,
   Dimensions,
 } from "react-native";
 import { myStyle } from "../styles/mystyle";
@@ -24,6 +24,7 @@ export function FirstPage() {
 
   const slideAnim = useRef(new Animated.Value(height * 0.9)).current;
 
+  //new
   useEffect(() => {
     Animated.timing(slideAnim, {
       toValue: 0, // ขยับขึ้นมา
@@ -35,97 +36,101 @@ export function FirstPage() {
   useEffect(() => {
     const loadUser = async () => {
       const token = await AsyncStorage.getItem("token");
-      if(!token) return;
+      if (!token) return;
 
-      try{
+      try {
         const decoder = jwtDecode(token);
         console.log(decoder);
         const now = Date.now() / 1000;
         console.log(now);
-        if(decoder.exp < now){
+        if (decoder.exp < now) {
           await AsyncStorage.removeItem("token");
           await AsyncStorage.removeItem("loggedInUser");
           return;
         }
         const storedUser = await AsyncStorage.getItem("loggedInUser");
         setUser(JSON.parse(storedUser));
-      }catch(e){
+      } catch (e) {
         console.log("Invalid token");
       }
     };
 
     const loadRider = async () => {
       const riderToken = await AsyncStorage.getItem("riderToken");
-      if(!riderToken) return;
+      if (!riderToken) return;
 
-      try{
+      try {
         const riderDecoder = jwtDecode(riderToken);
         console.log(riderDecoder);
         const now = Date.now() / 1000;
         console.log(now);
-        if(riderDecoder.exp < now){
+        if (riderDecoder.exp < now) {
           await AsyncStorage.removeItem("riderToken");
           await AsyncStorage.removeItem("LoggedRider");
           return;
         }
         const storedRider = await AsyncStorage.getItem("LoggedRider");
         setRider(JSON.parse(storedRider));
-      }catch(e){
-        console.log("Invalid riderToken")
+      } catch (e) {
+        console.log("Invalid riderToken");
       }
     };
     loadUser();
     loadRider();
-  }, [])
+  }, []);
 
-  if(rider){
-    return <MainRider rider={rider}/>
+  if (rider) {
+    return <MainRider rider={rider} />;
   }
-  
-  if(!user){
-      return (
-    <ImageBackground
-      source={require("../assets/image.png")}
-      style={myStyle.firstbg}
-      resizeMode="cover" //ปรับภาพเต็มหน้าจอ
-    >
-      <View>
-        <Image
-          source={require("../assets/app-name.png")}
-          style={myStyle.firsticon}
-        ></Image>
+
+  if (!user) {
+    return (
+       <View style={myStyle.newcontainer}>
+        <View style={myStyle.headerTextWrap}>
+          <Text style={myStyle.title}>GREENWIN</Text>
+          <Text style={myStyle.subtitle}>Let's Begin Your Journey</Text>
+        </View>
+
+        <Animated.View
+          style={[
+            myStyle.bottomContainer,
+            { transform: [{ translateY: slideAnim }] },
+          ]}
+        >
+          <Image
+          source={require("../assets/bottomLogin.jpg")}
+          style={myStyle.bottomImage}
+          resizeMode="cover"
+        />
         <TouchableOpacity
-          style={myStyle.firstbutton}
+          style={myStyle.newfirstbutton}
           onPress={() => navigation.navigate("Login")}
         >
-          <Text style={myStyle.firsttext}>ล็อคอิน</Text>
+          <Text style={myStyle.newfirsttext}>ล็อคอิน</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
-          style={myStyle.firstbutton}
+          style={myStyle.newsecondbutton}
           onPress={() => navigation.navigate("AddPerson")}
         >
-          <Text style={myStyle.firsttext}>สมัครบัญชีใช้งาน</Text>
+          <Text style={myStyle.newsecondtext}>สมัครบัญชีใช้งาน</Text>
         </TouchableOpacity>
 
+        <View style={myStyle.riderWrap}>
         <TouchableOpacity onPress={() => navigation.navigate("RiderLogin")}>
-          <Text
-            style={{
-              fontWeight: "bold",
-              alignSelf: "center",
-              position: "absolute",
-              marginTop: 200,
-              color:'white'
-            }}
-          >
-            สำหรับจักรยานยนต์รับจ้าง
-          </Text>
+          <Text style={myStyle.rider}>Sign Up</Text>
         </TouchableOpacity>
+        <Text style={myStyle.text}> as a Motorcycle Taxi Driver</Text>
+        </View>
+        
+
+        </Animated.View>
+        
+
+        
       </View>
-    </ImageBackground>
-  );
+    );
   }
 
-
-  
-  return <ListPerson user={user}/>
+  return <ListPerson user={user} />;
 }

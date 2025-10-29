@@ -163,13 +163,6 @@ export const myStyle = StyleSheet.create({
     color: "#307A59",
   },
 
-  firsticon: {
-    width: 300,
-    height: 100,
-    marginLeft: 85,
-    marginBottom: 50,
-  },
-
   edittopic: {
     marginTop: 50,
     color: "black",
@@ -314,64 +307,231 @@ export const myStyle = StyleSheet.create({
     backgroundColor: "#F8F8F8",
     alignItems: "center",
   },
-
-  //new-firstpage
+  //////////////////
+  //////////////////
+  //new-greenwin
   newcontainer: {
     flex: 1,
     backgroundColor: "#E3F5E8",
   },
+
   headerTextWrap: {
     marginLeft: 45, // as a Motorcycle Taxi Driver
     marginTop: 100,
   },
+
   title: {
     fontSize: 40,
-    fontWeight: '900',
+    fontWeight: "900",
     color: "#2B1845",
     letterSpacing: 2,
   },
+  
   subtitle: {
     marginTop: -2,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
     color: "#3A2852",
     opacity: 0.8,
   },
+
   topImage: {
     width: "100%",
     height: "70%",
   },
+
   bottomContainer: {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    height: 504, 
-    zIndex: 10, 
+    height: 504,
+    zIndex: 10,
   },
+
   bottomImage: {
     width: "100%",
     height: "100%",
   },
+
   riderWrap: {
-  flexDirection: "row",      // ให้ข้อความอยู่บรรทัดเดียว
-  justifyContent: "center",  // ให้อยู่ตรงกลางจอ
-  alignItems: "center",
-  position: "absolute",
-  bottom: 60,
-  width: "100%",              // ให้กินเต็มจอ เพื่อจัดกลางได้
-  zIndex: 30,
+    flexDirection: "row", // ให้ข้อความอยู่บรรทัดเดียว
+    justifyContent: "center", // ให้อยู่ตรงกลางจอ
+    alignItems: "center",
+    position: "absolute",
+    bottom: 60,
+    width: "100%", // ให้กินเต็มจอ เพื่อจัดกลางได้
+    zIndex: 30,
   },
+
   rider: {
     fontWeight: "bold",
     textDecorationLine: "underline",
     color: "white",
     fontSize: 14,
   },
+
   text: {
-  fontWeight: "500",
-  color: "white",
-  fontSize: 14,
+    fontWeight: "500",
+    color: "white",
+    fontSize: 14,
+  },
+
+  newfirstbutton: {
+    position: "absolute",
+    marginTop: 265, // ระยะห่างจากด้านบนของปุ่ม
+    justifyContent: "center", // จัดกึ่งกลางข้อความในปุ่ม
+    borderRadius: 25, // ทำให้มุมของปุ่มโค้งมน
+    alignItems: "center",
+    marginVertical: 10,
+    cursor: "pointer", // เปลี่ยนเคอร์เซอร์เมื่อโฮเวอร์
+    width: 304,
+    height: 49,
+    alignSelf: "center", // จัดกึ่งกลางปุ่มในแนวนอน
+    backgroundColor: "#13714C",
+    zIndex: 20,
+  },
+
+  newfirsttext: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#ffffff",
+  },
+
+  newsecondbutton: {
+    position: "absolute",
+    marginTop: 330,
+    justifyContent: "center",
+    borderRadius: 25,
+    alignItems: "center",
+    marginVertical: 10,
+    cursor: "pointer",
+    width: 304,
+    height: 49,
+    alignSelf: "center",
+    backgroundColor: "#ffffff",
+    zIndex: 20,
+  },
+
+  newsecondtext: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#13714C",
+  },
+
+  //new Login Page
+  logincontainer: {
+    flex: 1,
+  },
+  loginbottomImage: {
+    width: "100%",
+    height: "100%",
+    position: "absolute", // ภาพอยู่ด้านหลัง
+  },
+  logincontent: {
+    flex: 1,
+    justifyContent: "center", // จัดกึ่งกลางแนวตั้ง
+    alignItems: "center",     // จัดกึ่งกลางแนวนอน
+    paddingHorizontal: 20, // ระยะห่างด้านข้าง
+    marginTop: 50, 
+  },
+  logintitle: {
+    position: "absolute",
+    fontSize: 35,
+    fontWeight: '900',
+    letterSpacing: 2,
+    marginLeft: 58,
+    marginTop: 350,
+  },
+  loginerror: {
+    color: "red",
+    marginBottom: 15,
+  },
+  logininput: {
+    width: 304,
+    height: 49,
+    backgroundColor: "#F2F2F2",
+    borderRadius: 25,
+    paddingHorizontal: 24, // ระยะห่างด้านใน
+    fontSize: 18,
+    fontWeight: 500,
+    marginBottom: 15,
+  },
+  loginsign: {
+    justifyContent: "center", // จัดกึ่งกลางข้อความในปุ่ม
+    borderRadius: 25, // ทำให้มุมของปุ่มโค้งมน
+    alignItems: "center",
+    marginVertical: 10, 
+    cursor: "pointer", // เปลี่ยนเคอร์เซอร์เมื่อโฮเวอร์
+    width: 304,
+    height: 49,
+    backgroundColor: "#13714C",
+  },
+  loginWrap: {
+    position: "absolute",
+    flexDirection: "row",      // ให้ข้อความอยู่บรรทัดเดียว
+    justifyContent: "center",  // ให้อยู่ตรงกลางจอ
+    width: "100%",              // ให้กินเต็มจอ เพื่อจัดกลางได้
+    zIndex: 30,
+    bottom: 220,
+  },
+  logintext: {
+    fontWeight: "500",
+    color: "#C1C1C1",
+    fontSize: 14,
+  },
+  loginsignup: {
+    fontWeight: "bold",
+    textDecorationLine: "underline",
+    color: "#9A9A9A",
+    fontSize: 14,
+  },
+
+  //new-Signup Page
+   signcontainer: {
+    flex: 1,
+  },
+  signbottomImage: {
+    width: "100%",
+    height: "100%",
+    position: "absolute",
+  },
+  signcontent: {
+    flex: 1,
+    justifyContent: "flex-start", // จัดกึ่งกลางแนวตั้ง
+    alignItems: "center",     // จัดกึ่งกลางแนวนอน
+    paddingHorizontal: 20, // ระยะห่างด้านข้าง
+    marginTop: 280, 
+  },
+  signtitle: {
+    position: "absolute",
+    fontSize: 35,
+    fontWeight: '900',
+    letterSpacing: 2,
+    marginLeft: 58,
+    marginTop: 320, 
+  },
+  signerror: {
+    color: "red",
+    marginBottom: 15,
+  },
+  signinput: {
+    width: 304,
+    height: 49,
+    borderBottomWidth: 1.5, // เส้นข้างล่าง
+    borderBottomColor: "#F2F2F2", // สีเส้น
+    fontSize: 16,
+    color: "#13714C",
+    marginBottom: 15,
+    paddingVertical: 8, // ช่องว่างบนล่าง
+  },
+  signcreatebutoon: {
+    justifyContent: "center", // จัดกึ่งกลางข้อความในปุ่ม
+    borderRadius: 25, // ทำให้มุมของปุ่มโค้งมน
+    alignItems: "center",
+    marginVertical: 20, 
+    cursor: "pointer", // เปลี่ยนเคอร์เซอร์เมื่อโฮเวอร์
+    width: 304,
+    height: 49,
+    backgroundColor: "#13714C",
   },
 });
-
-
