@@ -74,7 +74,7 @@ export const myStyle = StyleSheet.create({
   },
 
   dropdown: {
-    height: 50,
+    height: 40,
     borderColor: "#aaa",
     borderRadius: 10,
     padding: 2,
@@ -240,9 +240,11 @@ export const myStyle = StyleSheet.create({
   requestbox: {
     backgroundColor: "#E8EAEA",
     width: 369,
-    height: 389,
+    height: 369,
     padding: 10,
     borderRadius: 15,
+    marginHorizontal:22
+    
   },
 
   selectrequest: {
@@ -260,6 +262,7 @@ export const myStyle = StyleSheet.create({
     padding: 20,
     borderRadius: 15,
     marginTop: 20,
+    zIndex:10
   },
 
   confirmContainer: {
@@ -534,4 +537,62 @@ export const myStyle = StyleSheet.create({
     height: 49,
     backgroundColor: "#13714C",
   },
+
+  // *************** Home.js **************** //
+  headerTitle: {
+    width:"412",
+    height:"115",
+    backgroundColor: '#fff', 
+    shadowColor: '#000',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 20,
+  },
+  greenwin:{
+    marginTop: 50,
+    fontWeight: "bold",
+    fontSize: 25,
+  },
+  headerHome: {
+    position: "absolute",
+    width: "100%",
+    height: 299,
+    zIndex: 10,
+  },
+  mainprofile: {
+    backgroundColor: "#ffffff70", // สีพื้นหลังขาวใสเล็กน้อย
+    borderRadius: 20, // มุมโค้งมน
+    padding: 30, // ระยะห่างภายในการ์ด
+    marginHorizontal: 26, // ระยะห่างด้านข้างของการ์ด
+    flexDirection: "row", // จัดวางเนื้อหาในแนวนอน
+    alignItems: "center", // จัดกึ่งกลางในแนวตั้ง
+    marginTop: 150, // ระยะห่างด้านบนของการ์ด
+    zIndex: 15, // ให้การ์ดอยู่เหนือภาพพื้นหลัง
+  },
+  avater: {
+    width: 64,
+    height: 64,
+    borderRadius: 32, // ทำให้เป็นวงกลม
+    overflow: "hidden", // ซ่อนส่วนที่เกิน
+    marginRight: 18,
+    zIndex: 20,
+  },
+  mainservice: {
+    position: "absolute",
+    marginHorizontal: 45, 
+    marginTop: 400,
+    zIndex: 20,
+    },
+  newdropdown: { 
+    height: 40,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    marginTop: 8,
+    marginBottom: 10,
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#000000ff",
+    width: 330,
+  },
+
 });

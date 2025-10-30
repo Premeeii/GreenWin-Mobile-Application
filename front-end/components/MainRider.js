@@ -189,70 +189,70 @@ export function MainRider() {
   }, [riderLocation]);
 
   return (
-    <View style={{ padding: 20, marginTop: 70 }}>
+    <View style={{flex:1, backgroundColor: "#F8F8F8",}}>
+       <View style={myStyle.headerHome}>
+                <View style={myStyle.headerTitle}>
+                  <Text style={myStyle.greenwin}>GreenWin</Text>
+                </View>
+      
+                <Image
+                  source={require("../assets/tophome.png")}
+                  style={{ width: "100%", height: "100%"}}
+                  resizeMode="cover"
+                />
+              </View>
+      
       <View style={myStyle.mainprofile}>
+        <View style={myStyle.avater}>
         <Image
           source={
             imageUri ? { uri: imageUri } : require("../assets/account.png")
           }
-          style={{ width: 80, height: 80, borderRadius: 80 }}
+          style={{ width: "100%", height: "100%", }}
         ></Image>
+        </View>
         <View style={{ marginLeft: 15 }}>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <Text
               style={{
-                fontWeight: "bold",
-                fontSize: 16,
-                color: "#fff",
+                color: "#7b8a7f", fontSize: 12,
               }}
             >
-              {rider.username}
+              @{rider.username}
             </Text>
             <TouchableOpacity
-              style={{ position: "absolute", marginLeft: 230 }}
+              style={{ position: "absolute", marginLeft: 200 }}
               onPress={() => navigation.navigate("EditRiderProfile")}
             >
-              <Feather name="edit" size={20} color="white" />
+              <Feather name="edit" size={18} color="#666967" />
             </TouchableOpacity>
           </View>
           <Text
             style={{
-              fontWeight: "bold",
-              fontSize: 16,
-              marginTop: 10,
-              color: "#fff",
+              marginTop: 6, fontWeight: "600", fontSize: 14
             }}
           >
             {rider.rider_firstname} {rider.rider_lastname}
           </Text>
           <Text
             style={{
-              fontWeight: "bold",
-              fontSize: 16,
-              marginTop: 10,
-              color: "#fff",
+              marginTop: 6, fontWeight: "600", fontSize: 14
             }}
           >
             {rider.vehicle}, {rider.license}
           </Text>
           <Text
             style={{
-              fontWeight: "bold",
-              fontSize: 16,
-              marginTop: 10,
-              color: "#fff",
+              marginTop: 6, fontWeight: "600", fontSize: 14
             }}
           >
             {rider.tel}
           </Text>
           <Text
             style={{
-              fontWeight: "bold",
-              fontSize: 16,
-              marginTop: 10,
-              color: "#fff",
+              marginTop: 6, fontWeight: "600", fontSize: 14
             }}
           >
             {rider.riderLocation}
@@ -260,7 +260,7 @@ export function MainRider() {
         </View>
       </View>
 
-      <View style={{ flexDirection: "row", marginTop: 20 }}>
+      <View style={{ flexDirection: "row", marginTop: 50,  zIndex: 10, marginLeft:20}}>
         <Switch
           style={myStyle.switch}
           thumbColor={Active ? "#27ae60" : "#f4f3f4"}
@@ -276,8 +276,8 @@ export function MainRider() {
         style={{
           fontWeight: "bold",
           fontSize: 20,
-          marginVertical: 10,
-          marginLeft: 20,
+          marginBottom:10,
+          marginLeft: 30,
         }}
       >
         กล่องคำร้อง

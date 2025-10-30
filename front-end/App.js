@@ -34,7 +34,7 @@ export default function App(){
            <Stack.Screen name='Request' component={Request} options={{headerShown:false}}></Stack.Screen>
            <Stack.Screen name='RiderLogin' component={RiderLogin} options={{headerShown:true,headerTitle:""}}></Stack.Screen>
            <Stack.Screen name='MainRider' component={MainRider} options={{headerShown:false, headerTitle:''}}></Stack.Screen>
-           <Stack.Screen name='RequestDetail' component={RequestDetail} options={{headerShown:true, headerTitle:''}}></Stack.Screen>
+           <Stack.Screen name='RequestDetail' component={RequestDetail} options={{headerShown:false, headerTitle:''}}></Stack.Screen>
            <Stack.Screen name='EditRiderProfile' component={EditRiderProfile} options={{headerTitle:''}}></Stack.Screen>
            <Stack.Screen name='Test' component={RealtimeScreen} options={{headerTitle:''}}></Stack.Screen>
            <Stack.Screen name='Summary' component={Summary} options={{headerShown:false}}></Stack.Screen>

@@ -241,62 +241,66 @@ export function ListPerson() {
   }, []);
 
   return (
-    <View style={{ padding: 20, marginTop: 90 }}>
-      <View style={myStyle.mainprofile}>
-        <Image
-          source={
-            imageUri ? { uri: imageUri } : require("../assets/account.png")
-          }
-          style={{ width: 80, height: 80, borderRadius: 80 }}
-        ></Image>
-        <View style={{ marginLeft: 15 }}>
-          <View
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 16,
-                color: "#fff",
-              }}
-            >
-              {user.username}
-            </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("EditProfile")}
-              style={{
-                position: "absolute",
-                left: 230,
-              }}
-            >
-              <View>
-                <Feather name="edit" size={20} color="white" />
-              </View>
-            </TouchableOpacity>
+
+    <View style={{flex: 1, backgroundColor: "#F8F8F8",}}>
+
+      {/* --------------- ส่วนหัว + โปรไฟล์ --------------- */}
+        {/* รูปภาพพื้นหลัง */}
+        <View style={myStyle.headerHome}>
+          <View style={myStyle.headerTitle}>
+            <Text style={myStyle.greenwin}>GreenWin</Text>
           </View>
-          <Text style={myStyle.textmainprofile}>
-            {user.fname} {user.lname}
-          </Text>
-          <Text style={myStyle.textmainprofile}>
-            <Foundation name="telephone" size={15} color="white" />
-            {"  "}
-            {user.tel}
-          </Text>
+
+          <Image
+            source={require("../assets/tophome.png")}
+            style={{ width: "100%", height: "100%"}}
+            resizeMode="cover"
+          />
         </View>
-      </View>
+
+        {/* ส่วนโปรไฟล์ */}
+        <View style={{
+          backgroundColor: "#ffffff70", // สีพื้นหลังขาวใสเล็กน้อย
+          borderRadius: 20, // มุมโค้งมน
+          padding: 30, // ระยะห่างภายในการ์ด
+          marginHorizontal: 26, // ระยะห่างด้านข้างของการ์ด
+          flexDirection: "row", // จัดวางเนื้อหาในแนวนอน
+          alignItems: "center", // จัดกึ่งกลางในแนวตั้ง
+          marginTop: 180, // ระยะห่างด้านบนของการ์ด
+          zIndex: 15, // ให้การ์ดอยู่เหนือภาพพื้นหลัง
+        }}>
+            <View style={myStyle.avater}>
+                <Image
+                  source={ imageUri ? { uri: imageUri } : require("../assets/account.png") }
+                  style={{ width: "100%", height: "100%",}}
+                />
+            </View>
+            <View style={{flex: 1,}}>
+                <Text style={{color: "#7b8a7f", fontSize: 12,}}>@{user.username}</Text>
+                <Text style={{marginTop: 6, fontWeight: "600", fontSize: 14}}>{user.fname} {user.lname}</Text>
+                <Text style={{fontWeight: "600", color: "#333"}}>{user.tel}</Text>
+            </View>
+            <TouchableOpacity 
+              onPress={() => navigation.navigate("EditProfile")} 
+              style={{marginBottom: 42,}} >
+                <View>
+                  <Feather name="edit" size={18} color="#666967" />
+                </View>
+            </TouchableOpacity>
+        </View>
+
+      {/* --------------- ส่วนเรียกใช้บริการ --------------- */}
       <View style={myStyle.mainservice}>
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-          เลือกสถานที่ที่ต้องการให้มารับ
-        </Text>
+        <Text style={{ fontWeight: "700", fontSize: 15 }}>เลือกสถานที่ที่ต้องการให้มารับ</Text>
         {error.selectLocation1 && (
           <Text style={{ color: "red" }}>{error.selectLocation1}</Text>
         )}
         <Dropdown
-          style={myStyle.dropdown}
+          style={myStyle.newdropdown}
           data={dropdownItems}
           labelField="label"
           valueField="value"
-          placeholder=""
+          placeholder="Choose location" placeholderStyle={{color: "#D9D9D9", fontWeight: "500"}}
           maxHeight={200}
           value={selectLocation1}
           onChange={(item) => {
@@ -343,11 +347,11 @@ export function ListPerson() {
           <Text style={{ color: "red" }}>{error.selectRider}</Text>
         )}
         <Dropdown
-          style={myStyle.dropdown}
+          style={myStyle.newdropdown}
           data={dropdownRiders}
           labelField="label"
           valueField="value"
-          placeholder=""
+          placeholder="Choose Rider Location" placeholderStyle={{color: "#D9D9D9", fontWeight: "500"}}
           maxHeight={200}
           value={selectRider}
           onChange={(item) => {
@@ -369,12 +373,12 @@ export function ListPerson() {
             </TouchableOpacity>
           )}
         />
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>กำหนดจุดหมาย</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 15,}}>กำหนดจุดหมาย</Text>
         {error.destination && (
           <Text style={{ color: "red" }}>{error.destination}</Text>
         )}
         <TextInput
-          style={myStyle.dropdown}
+          style={myStyle.newdropdown}
           placeholder=""
           value={destination}
           onChangeText={setDestination}
@@ -542,7 +546,7 @@ export function ListPerson() {
         style={{ position: "absolute", alignSelf: "center", marginTop: 750 }}
       >
         <TouchableOpacity onPress={() => setLogoutConfirm(true)}>
-          <Text style={{ fontWeight: "bold" }}>ล็อคเอาค์</Text>
+          <Text style={{ fontWeight: "bold", marginTop:30 }}>ล็อคเอาค์</Text>
         </TouchableOpacity>
       </View>
     </View>
