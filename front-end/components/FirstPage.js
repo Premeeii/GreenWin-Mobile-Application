@@ -118,9 +118,9 @@ export function FirstPage() {
 
         <View style={myStyle.riderWrap}>
         <TouchableOpacity onPress={() => navigation.navigate("RiderLogin")}>
-          <Text style={myStyle.rider}>Sign Up</Text>
+          <Text style={myStyle.rider}>ใช้งาน</Text>
         </TouchableOpacity>
-        <Text style={myStyle.text}> as a Motorcycle Taxi Driver</Text>
+        <Text style={myStyle.text}> สำหรับวินมอเตอร์ไซค์</Text>
         </View>
         
 

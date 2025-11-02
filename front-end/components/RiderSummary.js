@@ -21,7 +21,6 @@ export function RiderSummary() {
       setCustomerUsername(summaryData.customerUsername); //ต้องใช้เป็นsummaryDataเพราะเป็นAsynchonus
       setCustomerImage(summaryData.customerImage);
       setRiderLocation(summary.riderLocation);
-
     }
   };
 
@@ -76,9 +75,43 @@ export function RiderSummary() {
   }, [isFocus]);
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text style={myStyle.topicRequest}>กำลังไปรับ</Text>
-      <View style={myStyle.mainprofile}>
+    <View style={{ flex: 1 }}>
+      <View style={myStyle.headerHome}>
+        <View style={myStyle.headerTitle}>
+          <Text style={myStyle.greenwin}>GreenWin</Text>
+        </View>
+
+        <Image
+          source={require("../assets/tophome.png")}
+          style={{ width: "100%", height: "100%" }}
+          resizeMode="cover"
+        />
+      </View>
+      <Text
+        style={{
+          fontWeight: "bold",
+          alignSelf: "center",
+          fontSize: 28,
+          marginTop: 120,
+          marginBottom: 20,
+          zIndex: 10,
+        }}
+      >
+        กำลังไปรับ
+      </Text>
+      <View
+        style={{
+          backgroundColor: "#DAEEE5",
+          backgroundColor: "#ffffff70", // สีพื้นหลังขาวใสเล็กน้อย
+          borderRadius: 20, // มุมโค้งมน
+          padding: 30, // ระยะห่างภายในการ์ด
+          marginHorizontal: 26, // ระยะห่างด้านข้างของการ์ด
+          flexDirection: "row", // จัดวางเนื้อหาในแนวนอน
+          alignItems: "center", // จัดกึ่งกลางในแนวตั้ง
+          marginTop: 10, // ระยะห่างด้านบนของการ์ด
+          zIndex: 15, // ให้การ์ดอยู่เหนือภาพพื้นหลัง
+        }}
+      >
         <Image
           source={
             customerImage
@@ -93,20 +126,14 @@ export function RiderSummary() {
           ></View>
           <Text
             style={{
-              fontWeight: "bold",
-              fontSize: 16,
-              marginTop: 10,
-              color: "#fff",
+              marginTop: 6, fontWeight: "600", fontSize: 14
             }}
           >
             {summary.customerFname} {summary.customerLname}
           </Text>
           <Text
             style={{
-              fontWeight: "bold",
-              fontSize: 16,
-              marginTop: 10,
-              color: "#fff",
+             marginTop: 6, fontWeight: "600", fontSize: 14
             }}
           >
             {summary.customerTel}

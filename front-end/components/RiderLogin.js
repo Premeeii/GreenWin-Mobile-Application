@@ -41,38 +41,61 @@ export function RiderLogin() {
     }
   };
   return (
-    <View style={myStyle.container}>
-      
-      <Text style={myStyle.topic}>ล็อคอินสำหรับวิน</Text>
+    <View style={myStyle.logincontainer}>
+      <Image
+        source={require("../assets/backg.png")}
+        style={myStyle.loginbottomImage}
+        resizeMode="cover"
+      />
+      <TouchableOpacity onPress={() => navigation.navigate("FirstPage")}>
+          <Image
+            source={require("../assets/iconleft.png")}
+            style={{ width: 30, height: 30, marginTop: 80, marginLeft: 40 }} 
+          />
+      </TouchableOpacity>
+
+      <Text style={myStyle.loginrider}>ล็อคอิน</Text>
+      <Text style={myStyle.textrider}>สำหรับวินมอเตอร์ไซค์</Text>
+
+    <View style={{
+        flex: 1,
+        justifyContent: "center", //จัดกึ่งกลางแนวตั้ง
+        alignItems: "center",     // จัดกึ่งกลางแนวนอน
+        paddingHorizontal: 20, // ระยะห่างด้านข้าง
+        marginTop: 90,
+      }}>
 
       {invalid && <Text style={{ color: "red" }}>{errorAlert}</Text>}
       <TextInput
-        style={myStyle.input}
+        style={myStyle.logininput}
         placeholder="ชื่อผู้ใช้งาน"
         onChangeText={setUsername}
-      ></TextInput>
+      />
       <TextInput
-        style={myStyle.input}
+        style={myStyle.logininput}
         placeholder="รหัสผ่าน"
         onChangeText={setPassword}
         secureTextEntry
-      ></TextInput>
+      />
       <TouchableOpacity style={myStyle.button} onPress={riderLogin}>
         <Text style={myStyle.buttonLogin}>ล็อคอิน</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("RiderRegister")}>
-        <Text
-          style={{
-            fontWeight: "bold",
-            alignSelf: "center",
-            position: "absolute",
-            marginTop: 120,
-            color: "black",
-          }}
-        >
-          สมัครบัญชีใช้งานสำหรับวินมอเตอร์ไซค์
-        </Text>
-      </TouchableOpacity>
+
+      <View style={{    
+          position: "absolute",
+          flexDirection: "row",     
+          justifyContent: "center", 
+          width: "100%",             
+          zIndex: 30,
+          bottom: 220,
+          marginBottom: -30,
+        }}>
+        <Text style={myStyle.logintext}>คุณยังไม่มีบัญชีใช่ไหม?  </Text>
+        <TouchableOpacity onPress={() => navigation.navigate("RiderRegister")}>
+          <Text style={myStyle.loginsignup}>สมัคร</Text>
+        </TouchableOpacity>
+      </View>
+      </View>
     </View>
   );
 }

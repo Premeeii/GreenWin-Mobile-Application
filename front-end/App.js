@@ -32,7 +32,7 @@ export default function App(){
            <Stack.Screen name='ListPerson' component={ListPerson} options={{headerShown:false}}></Stack.Screen>
            <Stack.Screen name='EditProfile' component={EditProfile} options={{headerTitle:'',headerShown:true}}></Stack.Screen>
            <Stack.Screen name='Request' component={Request} options={{headerShown:false}}></Stack.Screen>
-           <Stack.Screen name='RiderLogin' component={RiderLogin} options={{headerShown:true,headerTitle:""}}></Stack.Screen>
+           <Stack.Screen name='RiderLogin' component={RiderLogin} options={{headerShown:false,headerTitle:''}}></Stack.Screen>
            <Stack.Screen name='MainRider' component={MainRider} options={{headerShown:false, headerTitle:''}}></Stack.Screen>
            <Stack.Screen name='RequestDetail' component={RequestDetail} options={{headerShown:false, headerTitle:''}}></Stack.Screen>
            <Stack.Screen name='EditRiderProfile' component={EditRiderProfile} options={{headerTitle:''}}></Stack.Screen>

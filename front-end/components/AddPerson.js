@@ -105,11 +105,11 @@ export function AddPerson() {
           style={{ width: 30, height: 30, marginTop: 80, marginLeft: 40 }}
         />
       </TouchableOpacity>
-      <Text style={myStyle.signtitle}>Sign up</Text>
+      <Text style={myStyle.signtitle}>สมัครบัญชี</Text>
       <View style={myStyle.signcontent}>
         <TextInput
           style={myStyle.signinput}
-          placeholder="First name"
+          placeholder="ชื่อจริง"
           placeholderTextColor="#C1C1C1"
           value={fname} //ตั้งค่าdefaultให้เป็นfnameที่ยังไม่ได้แก้
           onChangeText={setFname} //เปลี่ยนค่า
@@ -118,7 +118,7 @@ export function AddPerson() {
 
         <TextInput
           style={myStyle.signinput}
-          placeholder="Last name"
+          placeholder="นามสกุล"
           placeholderTextColor="#C1C1C1"
           value={lname}
           onChangeText={setLname}
@@ -127,7 +127,7 @@ export function AddPerson() {
 
         <TextInput
           style={myStyle.signinput}
-          placeholder="Username"
+          placeholder="ชื่อผู้ใช้งาน"
           placeholderTextColor="#C1C1C1"
           value={username}
           onChangeText={setUsername}
@@ -136,7 +136,7 @@ export function AddPerson() {
 
         <TextInput
           style={myStyle.signinput}
-          placeholder="Password"
+          placeholder="รหัสผ่าน"
           placeholderTextColor="#C1C1C1"
           value={password}
           onChangeText={setPassword}
@@ -146,7 +146,7 @@ export function AddPerson() {
 
         <TextInput 
           style={myStyle.signinput}
-          placeholder="Phone"
+          placeholder="เบอร์โทร"
           placeholderTextColor="#C1C1C1" 
           value={tel} 
           onChangeText={setTel} />

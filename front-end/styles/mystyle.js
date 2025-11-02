@@ -59,18 +59,20 @@ export const myStyle = StyleSheet.create({
     backgroundColor: "#307A59",
     paddingVertical: 12,
     paddingHorizontal: 25,
-    borderRadius: 10,
+    borderRadius: 25,
     alignItems: "center",
     marginVertical: 10,
     cursor: "pointer",
     width: 312,
     alignSelf: "center",
+    marginTop:30
   },
 
   buttonLogin: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+   
   },
 
   dropdown: {
@@ -206,7 +208,7 @@ export const myStyle = StyleSheet.create({
     width: 369,
     height: 219,
     alignSelf: "center",
-    marginTop: 50,
+    marginTop: 90,
     borderRadius: 15,
     padding: 10,
   },
@@ -432,7 +434,7 @@ export const myStyle = StyleSheet.create({
   },
   logincontent: {
     flex: 1,
-    justifyContent: "center", // จัดกึ่งกลางแนวตั้ง
+    justifyContent: "center", 
     alignItems: "center",     // จัดกึ่งกลางแนวนอน
     paddingHorizontal: 20, // ระยะห่างด้านข้าง
     marginTop: 50, 
@@ -444,6 +446,22 @@ export const myStyle = StyleSheet.create({
     letterSpacing: 2,
     marginLeft: 58,
     marginTop: 350,
+  },
+  loginrider:{
+    position: "absolute",
+    fontSize: 35,
+    fontWeight: '900',
+    letterSpacing: 2,
+    marginLeft: 58,
+    marginTop: 325,
+  },
+  textrider:{
+    position: "absolute",
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: 2,
+    marginLeft: 58,
+    marginTop: 375,
   },
   loginerror: {
     color: "red",
@@ -471,9 +489,9 @@ export const myStyle = StyleSheet.create({
   },
   loginWrap: {
     position: "absolute",
-    flexDirection: "row",      // ให้ข้อความอยู่บรรทัดเดียว
-    justifyContent: "center",  // ให้อยู่ตรงกลางจอ
-    width: "100%",              // ให้กินเต็มจอ เพื่อจัดกลางได้
+    flexDirection: "row",     
+    justifyContent: "center", 
+    width: "100%",             
     zIndex: 30,
     bottom: 220,
   },
@@ -490,7 +508,7 @@ export const myStyle = StyleSheet.create({
   },
 
   //new-Signup Page
-   signcontainer: {
+  signcontainer: {
     flex: 1,
   },
   signbottomImage: {
@@ -525,7 +543,6 @@ export const myStyle = StyleSheet.create({
     fontSize: 16,
     color: "#13714C",
     marginBottom: 15,
-    paddingVertical: 8, // ช่องว่างบนล่าง
   },
   signcreatebutoon: {
     justifyContent: "center", // จัดกึ่งกลางข้อความในปุ่ม

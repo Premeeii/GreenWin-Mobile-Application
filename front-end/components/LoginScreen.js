@@ -49,7 +49,7 @@ export default function LoginScreen({ navigation }) {
             source={require("../assets/iconleft.png")}
             style={{ width: 30, height: 30, marginTop: 80, marginLeft: 40 }} 
           />
-        </TouchableOpacity>
+      </TouchableOpacity>
 
       <Text style={myStyle.logintitle}>ล็อคอิน</Text>
 
@@ -71,9 +71,9 @@ export default function LoginScreen({ navigation }) {
         </TouchableOpacity>
 
         <View style={myStyle.loginWrap}>
-          <Text style={myStyle.logintext}>Don't have an account?  </Text>
+          <Text style={myStyle.logintext}>คุณยังไม่มีบัญชีใช่ไหม?  </Text>
           <TouchableOpacity onPress={() => navigation.navigate("AddPerson")}>
-            <Text style={myStyle.loginsignup}>Sign Up</Text>
+            <Text style={myStyle.loginsignup}>สมัคร</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -328,7 +328,7 @@ export function ListPerson() {
         />
         {selectLocation1 && (
           <Dropdown
-            style={myStyle.dropdown}
+            style={myStyle.newdropdown}
             data={dropdownItems2}
             labelField="label"
             valueField="value"
@@ -383,6 +383,12 @@ export function ListPerson() {
           value={destination}
           onChangeText={setDestination}
         />
+        <TouchableOpacity
+        style={myStyle.servicebutton}
+        onPress={() => setCallConfirm(true)}
+      >
+        <Text style={myStyle.buttonText}>เรียก</Text>
+      </TouchableOpacity>
       </View>
 
       <Modal transparent={true} visible={callConfirm}>
@@ -481,13 +487,7 @@ export function ListPerson() {
         </View>
       </Modal>
 
-      <TouchableOpacity
-        style={myStyle.servicebutton}
-        onPress={() => setCallConfirm(true)}
-      >
-        <Text style={myStyle.buttonText}>เรียก</Text>
-      </TouchableOpacity>
-
+      
       <Modal transparent={true} visible={logoutConfirm} animationType="fade">
         <View style={myStyle.overlay}>
           <View style={myStyle.logoutPopup}>
@@ -541,6 +541,7 @@ export function ListPerson() {
           </View>
         </View>
       </Modal>
+      
 
       <View
         style={{ position: "absolute", alignSelf: "center", marginTop: 750 }}
