@@ -22,6 +22,9 @@ public class Location {
     @Column(length = 1000, name = "imageLocation2")
     private String imageLocation2;
 
+    @Column(name = "description")
+    private String description;
+
     public Location() {
 
     }
@@ -58,11 +61,20 @@ public class Location {
         this.imageLocation2 = imageLocation2;
     }
 
-    public Location(String pickupName1, String pickupName2, String imageLocation, String imageLocation2) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Location(String pickupName1, String pickupName2, String imageLocation, String imageLocation2, String description) {
         this.pickupName1 = pickupName1;
         this.pickupName2 = pickupName2;
         this.imageLocation = imageLocation;
         this.imageLocation2 = imageLocation2;
+        this.description = description;
     }
 
 }

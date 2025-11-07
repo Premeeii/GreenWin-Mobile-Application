@@ -65,14 +65,13 @@ export const myStyle = StyleSheet.create({
     cursor: "pointer",
     width: 312,
     alignSelf: "center",
-    marginTop:30
+    marginTop: 30,
   },
 
   buttonLogin: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
-   
   },
 
   dropdown: {
@@ -92,15 +91,15 @@ export const myStyle = StyleSheet.create({
   },
 
   servicebutton: {
-    marginTop: 25,
+    marginTop: 40,
     backgroundColor: "#307A59",
     paddingVertical: 12,
     paddingHorizontal: 25,
-    borderRadius: 10,
+    borderRadius: 30,
     alignItems: "center",
     marginVertical: 10,
     cursor: "pointer",
-    width: 312,
+    width: 320,
     alignSelf: "center",
   },
 
@@ -130,13 +129,12 @@ export const myStyle = StyleSheet.create({
     borderRadius: 10,
     padding: 2,
     marginTop: 10,
-    marginBottom: 10,
     backgroundColor: "#E8EAEA",
     height: 37,
+    paddingHorizontal: 15,
   },
   mainreg: {
-    marginHorizontal: 30,
-    marginVertical: 15,
+    marginHorizontal: 50,
   },
 
   firstbg: {
@@ -174,15 +172,15 @@ export const myStyle = StyleSheet.create({
   },
 
   editinput: {
-    borderColor: "#aaa",
-    borderRadius: 10,
-    padding: 10,
-    marginTop: 10,
+    width: 320,
+    height: 49,
+    borderBottomWidth: 3,
+    borderBottomColor: "#F2F2F2",
+    justifyContent: "center",
     marginBottom: 10,
-    backgroundColor: "#E8EAEA",
-    height: 37,
-    width: 312,
-    alignSelf: "center",
+    fontSize: 16,
+    color: "#000000ff",
+    fontWeight: "500",
   },
   imageedit: {
     width: 150,
@@ -193,51 +191,53 @@ export const myStyle = StyleSheet.create({
   },
   editsection: {
     fontWeight: "bold",
-    marginLeft: 20,
+    marginTop: 10,
+    fontSize: 18,
     marginBottom: 5,
   },
   topicRequest: {
     fontWeight: "bold",
     alignSelf: "center",
     fontSize: 32,
-    marginTop: 100,
-    marginBottom: 20,
+    top: 10,
+    color: "#000000ff",
   },
   mainRequest: {
-    backgroundColor: "#DAEEE5",
-    width: 369,
-    height: 219,
+    marginTop: 50,
+    backgroundColor: "#fff",
+    width: "100%",
+    height: 600,
+    borderRadius: 70,
+    padding: 25,
+    paddingLeft: 53,
     alignSelf: "center",
-    marginTop: 90,
-    borderRadius: 15,
-    padding: 10,
   },
 
   sectionRequset: {
-    color: "#307A59",
+    color: "#000",
     fontWeight: "bold",
-    fontSize: 16,
-    marginLeft: 10,
-    marginTop: 10,
+    fontSize: 18,
+    marginTop: 20,
   },
 
   contentRequest: {
     color: "black",
-    marginLeft: 10,
     marginTop: 10,
-    fontSize: 15,
+    fontSize: 16,
+    fontWeight: "500",
   },
 
   cancelbutton: {
-    backgroundColor: "#E55555",
+   backgroundColor: "#E55555",
     paddingVertical: 12,
     paddingHorizontal: 25,
-    borderRadius: 10,
+    borderRadius: 40,
     alignItems: "center",
     marginVertical: 20,
     cursor: "pointer",
     width: 312,
     alignSelf: "center",
+    bottom: 300,
   },
   requestbox: {
     backgroundColor: "#E8EAEA",
@@ -245,16 +245,16 @@ export const myStyle = StyleSheet.create({
     height: 369,
     padding: 10,
     borderRadius: 15,
-    marginHorizontal:22
-    
+    marginHorizontal: 22,
+    marginTop:10
   },
-
   selectrequest: {
     marginVertical: 10,
     padding: 10,
     borderWidth: 1,
     borderColor: "#ced3cf",
     borderRadius: 15,
+    paddingLeft: 25,
   },
 
   requestdetail: {
@@ -264,7 +264,7 @@ export const myStyle = StyleSheet.create({
     padding: 20,
     borderRadius: 15,
     marginTop: 20,
-    zIndex:10
+    zIndex: 10,
   },
 
   confirmContainer: {
@@ -331,7 +331,7 @@ export const myStyle = StyleSheet.create({
     color: "#2B1845",
     letterSpacing: 2,
   },
-  
+
   subtitle: {
     marginTop: -2,
     fontSize: 18,
@@ -434,31 +434,31 @@ export const myStyle = StyleSheet.create({
   },
   logincontent: {
     flex: 1,
-    justifyContent: "center", 
-    alignItems: "center",     // จัดกึ่งกลางแนวนอน
+    justifyContent: "center",
+    alignItems: "center", // จัดกึ่งกลางแนวนอน
     paddingHorizontal: 20, // ระยะห่างด้านข้าง
-    marginTop: 50, 
+    marginTop: 50,
   },
   logintitle: {
     position: "absolute",
     fontSize: 35,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
     marginLeft: 58,
     marginTop: 350,
   },
-  loginrider:{
+  loginrider: {
     position: "absolute",
     fontSize: 35,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
     marginLeft: 58,
     marginTop: 325,
   },
-  textrider:{
+  textrider: {
     position: "absolute",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     letterSpacing: 2,
     marginLeft: 58,
     marginTop: 375,
@@ -481,7 +481,7 @@ export const myStyle = StyleSheet.create({
     justifyContent: "center", // จัดกึ่งกลางข้อความในปุ่ม
     borderRadius: 25, // ทำให้มุมของปุ่มโค้งมน
     alignItems: "center",
-    marginVertical: 10, 
+    marginVertical: 10,
     cursor: "pointer", // เปลี่ยนเคอร์เซอร์เมื่อโฮเวอร์
     width: 304,
     height: 49,
@@ -489,9 +489,9 @@ export const myStyle = StyleSheet.create({
   },
   loginWrap: {
     position: "absolute",
-    flexDirection: "row",     
-    justifyContent: "center", 
-    width: "100%",             
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
     zIndex: 30,
     bottom: 220,
   },
@@ -519,17 +519,17 @@ export const myStyle = StyleSheet.create({
   signcontent: {
     flex: 1,
     justifyContent: "flex-start", // จัดกึ่งกลางแนวตั้ง
-    alignItems: "center",     // จัดกึ่งกลางแนวนอน
+    alignItems: "center", // จัดกึ่งกลางแนวนอน
     paddingHorizontal: 20, // ระยะห่างด้านข้าง
-    marginTop: 280, 
+    marginTop: 280,
   },
   signtitle: {
     position: "absolute",
     fontSize: 35,
-    fontWeight: '900',
+    fontWeight: "900",
     letterSpacing: 2,
     marginLeft: 58,
-    marginTop: 320, 
+    marginTop: 320,
   },
   signerror: {
     color: "red",
@@ -548,7 +548,7 @@ export const myStyle = StyleSheet.create({
     justifyContent: "center", // จัดกึ่งกลางข้อความในปุ่ม
     borderRadius: 25, // ทำให้มุมของปุ่มโค้งมน
     alignItems: "center",
-    marginVertical: 20, 
+    marginVertical: 20,
     cursor: "pointer", // เปลี่ยนเคอร์เซอร์เมื่อโฮเวอร์
     width: 304,
     height: 49,
@@ -557,15 +557,15 @@ export const myStyle = StyleSheet.create({
 
   // *************** Home.js **************** //
   headerTitle: {
-    width:"412",
-    height:"115",
-    backgroundColor: '#fff', 
-    shadowColor: '#000',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "412",
+    height: "115",
+    backgroundColor: "#fff",
+    shadowColor: "#000",
+    justifyContent: "center",
+    alignItems: "center",
     elevation: 20,
   },
-  greenwin:{
+  greenwin: {
     marginTop: 50,
     fontWeight: "bold",
     fontSize: 25,
@@ -596,11 +596,11 @@ export const myStyle = StyleSheet.create({
   },
   mainservice: {
     position: "absolute",
-    marginHorizontal: 45, 
+    marginHorizontal: 45,
     marginTop: 400,
     zIndex: 20,
-    },
-  newdropdown: { 
+  },
+  newdropdown: {
     height: 40,
     borderRadius: 10,
     paddingHorizontal: 12,
@@ -612,4 +612,40 @@ export const myStyle = StyleSheet.create({
     width: 330,
   },
 
+  menu: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: 65,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    zIndex: 25,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  logout: {
+    width: 37,
+    height: 37,
+    resizeMode: "contain",
+    marginLeft: 250,
+    zIndex: 35,
+  },
+  time: {
+    width: 37,
+    height: 37,
+    resizeMode: "contain",
+    zIndex: 35,
+  },
+
+  //AdminMain.js
+  boxAdmin: {
+    position: "absolute",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    zIndex: 30,
+    marginTop: 305,
+  },
 });

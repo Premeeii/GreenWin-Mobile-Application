@@ -1,5 +1,7 @@
 package dev.kittpas.greenwin.Service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class HistoryService {
 
     public History addHistory(History history){
         return historyRepository.save(history);
+    }
+
+    public List<History> getHistoryByUser(String customerUsername){
+        return historyRepository.findByCustomerUsername(customerUsername);
     }
 
 }

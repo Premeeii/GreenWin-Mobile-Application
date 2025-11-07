@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, Modal } from "react-native";
-import { useState, useEffect } from "react";
+import { View, Text, TouchableOpacity, Modal, Animated, Image } from "react-native";
+import { useState, useEffect, useRef } from "react";
 import { myStyle } from "../styles/mystyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
@@ -12,6 +12,7 @@ export function Request() {
   const [cancelConfirm, setCancelConfirm] = useState(false);
 
   const navigation = useNavigation();
+  const bounceAnim = useRef(new Animated.Value(0)).current;
 
   let stompClient = null;
 
@@ -35,7 +36,6 @@ export function Request() {
         customerFname: request.fname,
         customerLname: request.lname,
         pickupName1: request.pickupName1,
-        pickupName2: request.pickupName2,
         riderLocation: request.riderLocation,
         customerTel: request.tel,
         status: "cancel",
@@ -96,9 +96,60 @@ export function Request() {
     console.log(request);
   }, []);
 
+Animated.loop(
+    Animated.sequence([
+      Animated.timing(bounceAnim, {
+        toValue: -10,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+      Animated.timing(bounceAnim, {
+        toValue: 0,
+        duration: 800,
+        useNativeDriver: true,
+      }),
+    ])
+  ).start();
+
   return (
+
+    <View style={{flex: 1, backgroundColor: '#A4E394'}}>
+      
+      <View style={myStyle.headerHome}>
+        <View style={myStyle.headerTitle}>
+          <Text style={myStyle.greenwin}>GreenWin</Text>
+        </View>
+      </View>
+
+      <View>
+        <Animated.Image
+          source={require("../assets/win.png")}
+          style={{
+            width: 150,
+            height: 207,
+            alignSelf: "center",
+            marginTop: 170,
+            zIndex: 15,
+            transform: [{ translateY: bounceAnim }],
+          }}
+          resizeMode="contain"
+        />
+        <Image
+          source={require("../assets/floor.png")}
+          style={{ 
+            position: "absolute",
+            bottom: 32, // ความสูงของพื้น
+            width: 240,
+            height: 60,
+            alignSelf: "center",
+            opacity: 0.8, // เงาจางหน่อย
+            zIndex: 10,
+          }}
+        />
+        <Text style={myStyle.topicRequest}>กำลังเรียกวิน</Text>
+      </View>
+
     <View>
-      <Text style={myStyle.topicRequest}>กำลังเรียกวิน</Text>
       <View style={myStyle.mainRequest}>
         <Text style={myStyle.sectionRequset}>เลือกจุดที่ต้องการให้มารับ</Text>
         <Text style={myStyle.contentRequest}>
@@ -172,6 +223,9 @@ export function Request() {
           ยกเลิก
         </Text>
       </TouchableOpacity>
+    </View>
+
+
     </View>
   );
 }

@@ -28,7 +28,13 @@ export default function LoginScreen({ navigation }) {
       if (response.ok) {
         await AsyncStorage.setItem("loggedInUser", JSON.stringify(user)); //เก็บข้อมูลเพื่อเอาไปใช้ที่หลัง
         await AsyncStorage.setItem("token", token); //เก็บjwt token
-        navigation.navigate("ListPerson"); //ไปหน้าต่อไป
+        
+        if(user.username === "admin"){
+          navigation.navigate("AdminMain");
+        }
+        else {
+        navigation.navigate("ListPerson");
+      }
       }
     } catch (error) {
       console.error(error);

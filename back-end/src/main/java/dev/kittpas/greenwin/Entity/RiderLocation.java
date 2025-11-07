@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name="riderlocation")
@@ -17,6 +18,7 @@ public class RiderLocation {
     private String imageRiderLocation;
 
     @Column(name = "availableRider")
+    @Min(0)
     private Integer availableRider = 0;
 
     public RiderLocation(){

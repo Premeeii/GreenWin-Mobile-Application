@@ -83,7 +83,7 @@ export function RiderSummary() {
 
         <Image
           source={require("../assets/tophome.png")}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: "100%",  }}
           resizeMode="cover"
         />
       </View>
@@ -126,14 +126,18 @@ export function RiderSummary() {
           ></View>
           <Text
             style={{
-              marginTop: 6, fontWeight: "600", fontSize: 14
+              marginTop: 6,
+              fontWeight: "600",
+              fontSize: 14,
             }}
           >
             {summary.customerFname} {summary.customerLname}
           </Text>
           <Text
             style={{
-             marginTop: 6, fontWeight: "600", fontSize: 14
+              marginTop: 6,
+              fontWeight: "600",
+              fontSize: 14,
             }}
           >
             {summary.customerTel}
@@ -153,7 +157,21 @@ export function RiderSummary() {
         <Text style={myStyle.contentRequest}>{summary.destination}</Text>
       </View>
       <TouchableOpacity
-        style={myStyle.button}
+        style={{
+          backgroundColor: "#307A59",
+          paddingVertical: 12,
+          paddingHorizontal: 25,
+          borderRadius: 25,
+          alignItems: "center",
+          marginVertical: 10,
+          cursor: "pointer",
+          width: 312,
+          alignSelf: "center",
+          position:'absolute',
+          zIndex:10,
+          marginTop:750
+    
+        }}
         onPress={() => deleteSummary(customerUsername)}
       >
         <Text style={myStyle.buttonText}>สำเร็จ</Text>

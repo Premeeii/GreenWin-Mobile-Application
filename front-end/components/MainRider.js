@@ -115,16 +115,16 @@ export function MainRider() {
       style={{ opacity: Active ? 1 : 0.4 }}
     >
       <View style={myStyle.selectrequest}>
-        <Text>
+        <Text style={{ fontWeight: "bold", fontSize: 14, }}>
           {item.fname} {item.lname}
         </Text>
-        <Text>
-          จุดรับ: {item.pickupName1}, {item.pickupName2}
+        <Text style={{ fontWeight: "bold", fontSize: 14, paddingTop: 2, }}> 
+          จุดรับ: {item.pickupName1}
         </Text>
-        <Text>ไป: {item.destination}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 14, paddingTop: 2, }}>ไป: {item.destination}</Text>
       </View>
     </TouchableOpacity>
-  );
+  ); //แก้ ที่รับเป็นตัวอ่อน
 
   //เชื่อม WebSocket (เฉพาะเมื่อ rider มีค่าแล้ว)
   useEffect(() => {
@@ -222,12 +222,6 @@ export function MainRider() {
             >
               @{rider.username}
             </Text>
-            <TouchableOpacity
-              style={{ position: "absolute", marginLeft: 200 }}
-              onPress={() => navigation.navigate("EditRiderProfile")}
-            >
-              <Feather name="edit" size={18} color="#666967" />
-            </TouchableOpacity>
           </View>
           <Text
             style={{
@@ -238,46 +232,37 @@ export function MainRider() {
           </Text>
           <Text
             style={{
-              marginTop: 6, fontWeight: "600", fontSize: 14
+              marginTop: 6, fontWeight: "600", fontSize: 12
             }}
           >
-            {rider.vehicle}, {rider.license}
+            {rider.vehicle} | {rider.license}
           </Text>
           <Text
             style={{
-              marginTop: 6, fontWeight: "600", fontSize: 14
-            }}
-          >
-            {rider.tel}
-          </Text>
-          <Text
-            style={{
-              marginTop: 6, fontWeight: "600", fontSize: 14
+              marginTop: 6, fontWeight: "600", fontSize: 12
             }}
           >
             {rider.riderLocation}
           </Text>
+          <Text
+            style={{
+              marginTop: 6, fontWeight: "600", fontSize: 12
+            }}
+          >
+            {rider.tel}
+          </Text>
         </View>
       </View>
 
-      <View style={{ flexDirection: "row", marginTop: 50,  zIndex: 10, marginLeft:20}}>
-        <Switch
-          style={myStyle.switch}
-          thumbColor={Active ? "#27ae60" : "#f4f3f4"}
-          value={Active}
-          onValueChange={(value) => setActive(value)}
-        />
-        <Text style={{ marginTop: 10, marginLeft: 10 }}>
-          {Active ? "พร้อมให้บริการ" : "ไม่พร้อมให้บริการ"}
-        </Text>
+      <View style={{ flexDirection: "row", marginTop: 80,  zIndex: 10, marginLeft:20}}>
       </View>
-
       <Text
         style={{
           fontWeight: "bold",
           fontSize: 20,
           marginBottom:10,
           marginLeft: 30,
+          zIndex:10
         }}
       >
         กล่องคำร้อง
@@ -348,12 +333,15 @@ export function MainRider() {
         </View>
       </Modal>
 
-      <TouchableOpacity
-        style={{ alignSelf: "center", marginTop: 20 }}
-        onPress={() => setLogoutConfirm(true)}
-      >
-        <Text style={{ fontWeight: "bold" }}>ล็อคเอาค์</Text>
-      </TouchableOpacity>
+      <View style={myStyle.menu}>
+        <TouchableOpacity onPress={() => setLogoutConfirm(true)}>
+          <Image
+            source={require("../assets/logout.png")}
+            style={myStyle.logout}
+          />
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 }

@@ -5,6 +5,7 @@ import { myStyle } from "../styles/mystyle";
 import { useIsFocused } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
+import { Dropdown } from "react-native-element-dropdown";
 
 export function RiderRegister2() {
   const [personId, setPersonId] = useState("");
@@ -14,12 +15,13 @@ export function RiderRegister2() {
   const [modelVehicle, setModelVehicle] = useState("");
   const [license, setLicense] = useState("");
   const [riderLicense, setRiderLicense] = useState("");
-  const [riderLocation, setRiderLocation] = useState("");
+  const [selectLocation, setSelectLocation] = useState(null);
+  const [riderLocation, setRiderLocation] = useState([]);
+  const [dropdownLocation, setDropdownLocation] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
-  const [riderLicenseImage, setRiderLicenseImage] = useState("");
   const [saveData, setSaveData] = useState([]);
   const [uploadStatus, setUploadStatus] = useState("");
 
@@ -41,49 +43,20 @@ export function RiderRegister2() {
     }
   };
 
-  const pickAndUploadImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
-      allowsEditing: true,
-      quality: 1,
-    });
-    console.log(result);
-    if (!result.canceled) {
-      const selectedAsset = result.assets[0];
-      const photo = {
-        uri: selectedAsset.uri,
-        type: selectedAsset.mimeType || "image/jpeg",
-        name: selectedAsset.fileName || "image.jpg",
-      };
-      setRiderLicenseImage(result.assets[0].uri);
-      await handleUpload(photo);
-    }
-  };
-
-  const handleUpload = async (photo) => {
-    const data = new FormData();
-    data.append("file", photo);
-    data.append("upload_preset", "greenwin");
-
+  const fetchRiderLocation = async () => {
     try {
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/preme/image/upload",
-        {
-          method: "POST",
-          body: data,
-          headers: {
-            Accept: "application/json",
-            "Content-type": "multipart/form-data",
-          },
-        }
-      );
-      const json = await res.json();
-      console.log("License Upload:", json.secure_url);
-      setRiderLicenseImage(json.secure_url);
-      setUploadStatus("อัปโหลดสำเร็จ");
+      const response = await fetch("http://10.0.2.2:8080/api/riderlocation");
+      const json = await response.json();
+      setRiderLocation(json);
+      console.log(json);
+
+      const dropdownRider = json.map((item) => ({
+        label: `${item.riderLocation}`,
+        value: item.riderLocation,
+      }));
+      setDropdownLocation(dropdownRider);
     } catch (error) {
-      console.error("Upload error");
-      setUploadStatus("อัปโหลดไม่สำเร็จ");
+      console.log(error);
     }
   };
 
@@ -102,11 +75,11 @@ export function RiderRegister2() {
           modelVehicle,
           license,
           riderLicense,
-          riderLocation,
+          riderLocation: selectLocation,
           username,
           password,
           email,
-          riderLicenseImage,
+          tel,
         }),
       });
       const reg = await response.json();
@@ -122,17 +95,17 @@ export function RiderRegister2() {
     }
   };
 
-
   useEffect(() => {
     if (isFocus) {
       LoadData();
+      fetchRiderLocation();
     }
   }, [isFocus]);
 
   return (
     <View style={{ backgroundColor: "#fff", flex: 1 }}>
       <View style={myStyle.mainreg}>
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 15 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 50 }}>
           เลขใบอนุญาตขับขี่
         </Text>
         <TextInput
@@ -140,7 +113,7 @@ export function RiderRegister2() {
           value={riderLicense}
           onChangeText={setRiderLicense}
         />
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 15 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           จุดที่ประจำ
         </Text>
         <TextInput
@@ -149,7 +122,7 @@ export function RiderRegister2() {
           onChangeText={setRiderLocation}
         />
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           ชื่อผู้ใช้งาน
         </Text>
         <TextInput
@@ -158,7 +131,7 @@ export function RiderRegister2() {
           onChangeText={setUsername}
         />
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           รหัสผ่าน
         </Text>
         <TextInput
@@ -167,7 +140,7 @@ export function RiderRegister2() {
           onChangeText={setPassword}
         />
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           อีเมลล์
         </Text>
         <TextInput
@@ -176,32 +149,26 @@ export function RiderRegister2() {
           onChangeText={setEmail}
         />
 
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           เบอร์โทร
         </Text>
         <TextInput style={myStyle.inputreg} value={tel} onChangeText={setTel} />
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
-          หลักฐานยืนยัน
-        </Text>
+
         <TouchableOpacity
-          onPress={pickAndUploadImage}
           style={{
-            marginTop: 10,
-            paddingVertical: 4,
-            width: 80,
-            height: 30,
-            backgroundColor: "#fff",
+            backgroundColor: "#307A59",
+            paddingVertical: 12,
+            paddingHorizontal: 25,
+            borderRadius: 25,
             alignItems: "center",
-            borderRadius: 15,
-            borderWidth: 1,
+            marginVertical: 10,
+            cursor: "pointer",
+            width: 312,
+            alignSelf: "center",
+            marginTop: 80,
           }}
+          onPress={handleRiderRegister}
         >
-          <Text style={{ color: "black" }}>อัปโหลด</Text>
-        </TouchableOpacity>
-        {uploadStatus !== "" && (
-          <Text style={{ marginTop: 5, color: "green" }}>{uploadStatus}</Text>
-        )}
-        <TouchableOpacity style={myStyle.button} onPress={handleRiderRegister}>
           <Text style={myStyle.buttonLogin}>ยืนยัน</Text>
         </TouchableOpacity>
       </View>

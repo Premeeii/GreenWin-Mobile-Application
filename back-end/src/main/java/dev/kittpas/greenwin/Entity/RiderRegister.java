@@ -43,10 +43,10 @@ public class RiderRegister {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "riderLicenseImage")
-    private String riderLicenseImage;
+    @Column(name = "tel")
+    private String tel;
 
-    public RiderRegister(){
+    public RiderRegister() {
 
     }
 
@@ -137,18 +137,18 @@ public class RiderRegister {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getRiderLicenseImage() {
-        return riderLicenseImage;
+
+    public String getTel() {
+        return tel;
     }
 
-    public void setRiderLicenseImage(String riderLicenseImage) {
-        this.riderLicenseImage = riderLicenseImage;
+    public void setTel(String tel) {
+        this.tel = tel;
     }
-    
 
     public RiderRegister(String personId, String riderFirstname, String riderLastname, String brandVehicle,
             String modelVehicle, String license, String riderLicense, String riderLocation, String username,
-            String password, String email, String riderLicenseImage) {
+            String password, String email,  String tel) {
         this.personId = personId;
         this.riderFirstname = riderFirstname;
         this.riderLastname = riderLastname;
@@ -160,10 +160,7 @@ public class RiderRegister {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.riderLicenseImage = riderLicenseImage;
+        this.tel = tel;
     }
-
-
-    
 
 }

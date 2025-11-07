@@ -66,6 +66,7 @@ export function ListPerson() {
               label: item.pickupName1,
               value: item.pickupName1,
               imageLocation: item.imageLocation,
+              description: item.description,
             },
           ])
         ).values()
@@ -81,6 +82,7 @@ export function ListPerson() {
     try {
       const response = await fetch("http://10.0.2.2:8080/api/riderlocation");
       const json = await response.json();
+      console.log("RiderLocation Response:", json);
       setRiderLocation(json);
 
       const dropdownRider = json.map((item) => ({
@@ -119,7 +121,6 @@ export function ListPerson() {
         },
         body: JSON.stringify({
           pickupName1: selectLocation1,
-          pickupName2: selectLocation2,
           riderLocation: selectRider,
           imageRequest: selectImage,
           destination,
@@ -153,10 +154,6 @@ export function ListPerson() {
       tempError.selectLocation1 = "โปรดเลือกจุดที่ต้องการให้มารับ";
       valid = false;
     }
-    if (!selectLocation2) {
-      tempError.selectLocation2 = "โปรดเลือกจุดที่ต้องการให้มารับ";
-      valid = false;
-    }
     if (!selectRider) {
       tempError.selectRider = "โปรดเลือกจุดให้บริการวินมอเตอร์ไซค์";
       valid = false;
@@ -184,26 +181,15 @@ export function ListPerson() {
   useEffect(() => {
     fetchUsers(); // โหลดข้อมูลตอนเปิดหน้านี้
     fetchLocation();
-    fetchRiderLocation();
+    
     if (isFocus) {
       //refreshข้อมูล
+      fetchRiderLocation(); //รีเฟรซที่มาหน้านี้
       loadUser();
     }
   }, [isFocus]);
 
-  useEffect(() => {
-    //สำหรับเมื่อเลือกpickupName 1 แล้ว จะดึงข้อมูล pickupName2 จาก pickupName1ที่เลือก
-    if (selectLocation1) {
-      const filter = location
-        .filter((item) => item.pickupName1 === selectLocation1) //คัดกลองข้อมูลจากที่เลือกpickupName1
-        .map((item) => ({
-          label: item.pickupName2,
-          value: item.pickupName2,
-        }));
-      console.log("Filtered pickupName2:", filter);
-      setDropdownItems2(filter);
-    }
-  }, [selectLocation1, location]);
+  
 
   useEffect(() => {
     const socket = new SockJS("http://10.0.2.2:8080/ws");
@@ -216,6 +202,7 @@ export function ListPerson() {
         stompClient.subscribe("/topic/riderLocation", (message) => {
           const updatedRider = JSON.parse(message.body);
           console.log("RiderLocationUpdate", updatedRider);
+          fetchRiderLocation(); // ✅ ดึงข้อมูลใหม่จาก backend ทุกครั้งที่มี message
           setDropdownRiders((prev) =>
             prev.map((item) =>
               item.value === updatedRider.riderLocation
@@ -300,7 +287,7 @@ export function ListPerson() {
           data={dropdownItems}
           labelField="label"
           valueField="value"
-          placeholder="Choose location" placeholderStyle={{color: "#D9D9D9", fontWeight: "500"}}
+          placeholder=""
           maxHeight={200}
           value={selectLocation1}
           onChange={(item) => {
@@ -322,24 +309,14 @@ export function ListPerson() {
                   marginRight: 10,
                 }}
               />
-              <Text>{item.label}</Text>
+              <View>
+                <Text style={{color: "#000000ff", fontSize:16}}>{item.label}</Text>
+                <Text style={{color: "#000000ff", fontSize:14}}>{item.description}</Text>
+              </View>
             </View>
           )}
         />
-        {selectLocation1 && (
-          <Dropdown
-            style={myStyle.newdropdown}
-            data={dropdownItems2}
-            labelField="label"
-            valueField="value"
-            placeholder=""
-            maxHeight={200}
-            value={selectLocation2}
-            onChange={(item) => {
-              setSelectLocation2(item.value);
-            }}
-          />
-        )}
+
         <Text style={{ fontWeight: "bold", fontSize: 15 }}>
           เลือกจุดให้บริการวินมอเตอร์ไซค์สีเขียว
         </Text>
@@ -351,7 +328,7 @@ export function ListPerson() {
           data={dropdownRiders}
           labelField="label"
           valueField="value"
-          placeholder="Choose Rider Location" placeholderStyle={{color: "#D9D9D9", fontWeight: "500"}}
+          placeholder=""
           maxHeight={200}
           value={selectRider}
           onChange={(item) => {
@@ -419,7 +396,7 @@ export function ListPerson() {
                     marginLeft: 4,
                   }}
                 >
-                  {selectLocation1} {selectLocation2}
+                  {selectLocation1} 
                 </Text>
               </View>
               <Text
@@ -541,15 +518,25 @@ export function ListPerson() {
           </View>
         </View>
       </Modal>
-      
 
-      <View
-        style={{ position: "absolute", alignSelf: "center", marginTop: 750 }}
-      >
-        <TouchableOpacity onPress={() => setLogoutConfirm(true)}>
-          <Text style={{ fontWeight: "bold", marginTop:30 }}>ล็อคเอาค์</Text>
+      <View style={myStyle.menu}>
+
+        <TouchableOpacity onPress={() => navigation.navigate("History")}>
+          <Image
+            source={require("../assets/time.png")}
+            style={myStyle.time}
+          />
         </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setLogoutConfirm(true)}>
+          <Image
+            source={require("../assets/logout.png")}
+            style={myStyle.logout}
+          />
+        </TouchableOpacity>
+
       </View>
+      
     </View>
   );
 }

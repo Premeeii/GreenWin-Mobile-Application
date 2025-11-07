@@ -90,20 +90,23 @@ export function RiderRegister() {
 
   return (
     <View style={{ backgroundColor: "#fff", flex: 1 }}>
+      
       <Text
         style={{
           color: "#307A59",
-          fontWeight: "bold",
-          fontSize: 32,
+          fontWeight: '900',
+          fontSize: 30,
           fontFamily: "inter",
-          marginTop: 20,
-          marginLeft: 30,
+          marginTop: 28,
+          marginLeft: 50,
         }}
       >
-        สมัครบัญชีใช้งานสำหรับวินมอเตอร์ไซค์
+        สมัครใช้งาน {"\n"}
+        สำหรับวินมอเตอร์ไซค์
       </Text>
+
       <View style={myStyle.mainreg}>
-        <Text style={{ fontWeight: "bold", fontSize: 15, marginTop: 5 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 25 }}>
           ชื่อจริง
         </Text>
         <TextInput
@@ -113,7 +116,7 @@ export function RiderRegister() {
         />
         <Text style={{ color: "red" }}>{errors.riderFirstname}</Text>
 
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>นามสกุล</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>นามสกุล</Text>
         <TextInput
           style={myStyle.inputreg}
           value={riderLastname}
@@ -121,7 +124,7 @@ export function RiderRegister() {
         />
         <Text style={{ color: "red" }}>{errors.riderLastname}</Text>
 
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
           ผู้ผลิตรถมอเตอร์ไซค์
         </Text>
         <TextInput
@@ -131,7 +134,7 @@ export function RiderRegister() {
         />
         <Text style={{ color: "red" }}>{errors.brandVehicle}</Text>
 
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>
           รุ่นของรถมอเตอร์ไซค์
         </Text>
         <TextInput
@@ -141,7 +144,7 @@ export function RiderRegister() {
         />
         <Text style={{ color: "red" }}>{errors.modelVehicle}</Text>
 
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>ทะเบียนรถ</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>ทะเบียนรถ</Text>
         <TextInput
           style={myStyle.inputreg}
           value={license}
@@ -149,7 +152,7 @@ export function RiderRegister() {
         />
         <Text style={{ color: "red" }}>{errors.license}</Text>
 
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>เลขบัตรประชาชน</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 18 }}>เลขบัตรประชาชน</Text>
         <TextInput
           style={myStyle.inputreg}
           value={personId}
@@ -157,7 +160,19 @@ export function RiderRegister() {
         />
         <Text style={{ color: "red" }}>{errors.personId}</Text>
 
-        <TouchableOpacity style={myStyle.button} onPress={handleSaveData}>
+        <TouchableOpacity 
+          style={{
+            backgroundColor: "#307A59",
+            paddingVertical: 9,
+            borderRadius: 10,
+            alignItems: "center",
+            marginVertical: 10,
+            cursor: "pointer",
+            width: 130,
+            marginTop: 18,
+            marginLeft: 180,
+          }} 
+          onPress={handleSaveData}>
           <Text style={myStyle.buttonLogin}>ถัดไป</Text>
         </TouchableOpacity>
       </View>

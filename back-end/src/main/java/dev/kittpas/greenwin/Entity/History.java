@@ -1,5 +1,7 @@
 package dev.kittpas.greenwin.Entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,10 @@ public class History {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer summaryid;
+
+    @CreationTimestamp
+    @Column(name = "timeStamp")
+    private String timeStamp;
 
     @Column(name = "riderUsername")
     private String riderUsername;
@@ -194,10 +200,18 @@ public class History {
         this.status = status;
     }
 
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
     public History(Integer summaryid, String riderUsername, String riderFname, String riderLname, String license,
             String riderTel, String riderLocation, String pickupName1, String pickupName2, String destination,
             String customerUsername, String customerFname, String customerLname, String customerTel, String vehicle,
-            String status) {
+            String status, String timeStamp) {
         this.summaryid = summaryid;
         this.riderUsername = riderUsername;
         this.riderFname = riderFname;
@@ -214,7 +228,9 @@ public class History {
         this.customerTel = customerTel;
         this.vehicle = vehicle;
         this.status = status;
+        this.timeStamp = timeStamp;
     }
+
 
     
 

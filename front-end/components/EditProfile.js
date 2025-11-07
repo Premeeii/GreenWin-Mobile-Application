@@ -136,36 +136,51 @@ export function EditProfile() {
   }, []);
 
   return (
-    <View style={{ backgroundColor: "#fff", flex: 1 }}>
-      <Text style={myStyle.edittopic}>บัญชีผู้ใช้</Text>
-      <View style={myStyle.mainreg}>
-        <TouchableOpacity onPress={pickAndUploadImage}>
+   <View style={{ backgroundColor: "#fff", flex: 1 }}>
+
+      <View style={myStyle.headerHome}>
+        <View style={myStyle.headerTitle}>
+            <Text style={myStyle.greenwin}>บัญชีผู้ใช้</Text>
+        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("ListPerson")}>
+          <Image
+            source={require("../assets/iconleft.png")}
+            style={{ width: 25, height: 25, marginTop: -45, marginLeft: 40 }} 
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={{ marginHorizontal: 47, marginTop: 165, }}>
+        <TouchableOpacity onPress={pickAndUploadImage} style={{ zIndex: 10 }}>
           {
             <Image
               source={
                 imageUri ? { uri: imageUri } : require("../assets/account.png")
               } //ถ้ายังไม่มีรูปโปรก็จะใช้อันของที่ให้มาในแอป
-              style={myStyle.imageedit}
-            ></Image>
+              style={myStyle.imageedit}>
+            </Image>
           }
         </TouchableOpacity>
         <Text style={myStyle.editsection}>ชื่อผู้ใช้งาน</Text>
-        <Text
-          style={{
-            borderColor: "#aaa",
-            color: "gray",
-            borderRadius: 10,
-            padding: 10,
-            marginTop: 10,
-            marginBottom: 10,
-            backgroundColor: "#E8EAEA",
-            height: 37,
-            width: 312,
-            alignSelf: "center",
-          }}
-        >
-          {user.username}
-        </Text>
+          <View
+            style={{
+              width: 320,
+              height: 49,
+              borderBottomWidth: 3, 
+              borderBottomColor: "#F2F2F2",
+              justifyContent: "center",
+              marginBottom: 10,
+            }}
+          >
+          <Text 
+            style={{ 
+              fontSize: 16, 
+              color: "#9f9d9dff", 
+              fontWeight: "500",
+            }}
+          >{user.username}
+          </Text>
+          </View>
         <Text style={myStyle.editsection}>ชื่อจริง</Text>
         <TextInput
           style={myStyle.editinput}

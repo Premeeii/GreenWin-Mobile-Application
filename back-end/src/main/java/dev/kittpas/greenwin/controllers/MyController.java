@@ -289,11 +289,26 @@ public class MyController {
 
         return historyService.addHistory(history);
     }
+    
+    @GetMapping("/findhistory/{customerUsername}")
+    public List<History> getUserHistory(@PathVariable String customerUsername){
+        return historyService.getHistoryByUser(customerUsername);
+    }
 
     //RiderRegister
-    @PostMapping("riderregister")
+    @PostMapping("/riderregister")
     public RiderRegister riderRegister(@RequestBody RiderRegister riderRegister){
         return riderRegisterService.addriderRegister(riderRegister);
+    }
+
+    @GetMapping("/getriderregister")
+    public List<RiderRegister> findRiderRegister(){
+        return riderRegisterService.getRiderRegister(riderRegisterService);
+    }
+
+    @DeleteMapping("/deltriderregister/{username}")
+    public void deleteRiderRegister(@PathVariable String username){
+        riderRegisterService.deleteRiderRegister(username);
     }
     
 
