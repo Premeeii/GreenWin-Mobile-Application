@@ -128,6 +128,7 @@ export function RequestDetail({ route }) {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#F8F8F8" }}>
+      
       <View style={myStyle.headerHome}>
         <TouchableOpacity
           style={{
@@ -138,18 +139,19 @@ export function RequestDetail({ route }) {
           }}
           onPress={() => navigation.navigate('MainRider')}
         >
-          <Ionicons name="arrow-back-outline" size={24} color="black" />
+        <Ionicons name="arrow-back-outline" size={24} color="black" />
         </TouchableOpacity>
         <View style={myStyle.headerTitle}>
-          <Text style={myStyle.greenwin}>GreenWin</Text>
+          <Text style={myStyle.greenwin}>คำร้อง</Text>
         </View>
-
+        
         <Image
-          source={require("../assets/tophome.png")}
-          style={{ width: "100%", height: "100%" }}
+          source={require("../assets/topAdmin.png")}
+          style={{ width: "100%", height: 217 }}
           resizeMode="cover"
         />
       </View>
+
       <View
         style={{
           backgroundColor: "#ffffff70", // สีพื้นหลังขาวใสเล็กน้อย
@@ -158,105 +160,86 @@ export function RequestDetail({ route }) {
           marginHorizontal: 26, // ระยะห่างด้านข้างของการ์ด
           flexDirection: "row", // จัดวางเนื้อหาในแนวนอน
           alignItems: "center", // จัดกึ่งกลางในแนวตั้ง
-          marginTop: 180, // ระยะห่างด้านบนของการ์ด
+          marginTop: 138, // ระยะห่างด้านบนของการ์ด
           zIndex: 15, // ให้การ์ดอยู่เหนือภาพพื้นหลัง
         }}
       >
-        <View style={myStyle.avater}>
-          <Image
-            source={
-              customerImage
-                ? { uri: customerImage }
-                : require("../assets/account.png")
-            }
-            style={{ width: "100%", height: "100%" }}
+
+      <View style={myStyle.avater}>
+        <Image 
+          source={ customerImage ? { uri: customerImage } : require("../assets/account.png")}
+          style={{ width: "100%", height: "100%" }}
           />
-        </View>
+      </View>
 
-        <View style={{ marginLeft: 15 }}>
-          <Text style={{ color: "#7b8a7f", fontSize: 12 }}>
-            @{request.username}
-          </Text>
-          <View style={{ flexDirection: "column" }}>
-            <Text style={{ marginTop: 6, fontWeight: "600", fontSize: 14 }}>
-              {request.fname} {request.lname}
-            </Text>
-            <Text style={{ marginTop: 6, fontWeight: "600", fontSize: 14 }}>
-              {request.tel}
-            </Text>
-          </View>
+      <View style={{ marginLeft: 15 }}>
+        <Text style={{ color: "#7b8a7f", fontSize: 12 }}> @{request.username} </Text>
+        <View style={{ flexDirection: "column" }}>
+          <Text style={{ marginTop: 6, fontWeight: "600", fontSize: 14 }}> {request.fname} {request.lname} </Text>
+          <Text style={{ marginTop: 6, fontWeight: "600", fontSize: 14 }}> {request.tel} </Text>
         </View>
       </View>
 
-      <View style={{ flex: 1, marginTop: 110 }}>
-        <Image
-          source={{ uri: imageLocation }}
-          style={{
-            width: 150,
-            height: 150,
-            alignSelf: "center",
-            marginBottom: 20,
-            borderRadius: 15,
-          }}
-        />
-        <Text
-          style={{
-            fontWeight: "bold",
-            color: "#307A59",
-            fontSize: 16,
-            marginLeft: 80,
-          }}
-        >
-          เลือกจุดที่ต้องการให้มารับ
-        </Text>
-        <Text style={{ marginLeft: 80 }}>
-          {request.pickupName1}, {request.pickupName2}
-        </Text>
+    </View>
 
-        <Text
-          style={{
-            fontWeight: "bold",
-            color: "#307A59",
-            fontSize: 16,
-            marginTop: 10,
-            marginLeft: 80,
-          }}
-        >
-          เลือกจุดให้บริการวินมอเตอร์ไซค์สีเขียว
-        </Text>
-        <Text style={{ marginLeft: 80 }}>{request.riderLocation}</Text>
+    <View 
+      style={{
+        zIndex: 10,
+        backgroundColor: "#fff",
+        marginTop: 60,
+        margin: 25, 
+        borderRadius: 20, 
+        padding: 25,
+        borderWidth: 1,
+        borderColor: "#E8EAEA",
+      }}>
+      <Image
+        source={{ uri: imageLocation }}
+        style={{
+          width: 150,
+          height: 150,
+          alignSelf: "center",
+          marginTop: 5,
+          marginBottom: 25,
+          borderRadius: 15,
+        }}
+      />
+      <Text style={{ color: "#000", fontWeight: "bold", fontSize: 16, marginLeft: 15, }}> 
+        เลือกจุดที่ต้องการให้มารับ
+      </Text>
+      <Text style={{ color: "black", marginTop: 5, fontSize: 16, fontWeight: "500", marginLeft: 15, }}>
+        {request.pickupName1}, {request.pickupName2}
+      </Text>
+      <Text style={{ color: "#000", fontWeight: "bold", fontSize: 16, marginLeft: 15, marginTop: 10, }}>
+        เลือกจุดให้บริการวินมอเตอร์ไซค์สีเขียว
+      </Text>
+      <Text style={{ color: "black", marginTop: 5, fontSize: 16, fontWeight: "500", marginLeft: 15, }}>
+        {request.riderLocation}
+      </Text>
+      <Text style={{ color: "#000", fontWeight: "bold", fontSize: 16, marginLeft: 15, marginTop: 10, }}>
+        กำหนดจุดหมาย
+      </Text>
+      <Text style={{ color: "black", marginTop: 5, fontSize: 16, fontWeight: "500", marginLeft: 15, }}>
+        {request.destination} 
+      </Text>
+    </View>
 
-        <Text
-          style={{
-            fontWeight: "bold",
-            color: "#307A59",
-            fontSize: 16,
-            marginTop: 10,
-            marginLeft: 80,
-          }}
-        >
-          กำหนดจุดหมาย
-        </Text>
-        <Text style={{ marginLeft: 80 }}>{request.destination} </Text>
+    <TouchableOpacity
+      style={{
+        justifyContent: "center", // จัดกึ่งกลางข้อความในปุ่ม
+        borderRadius: 25, // ทำให้มุมของปุ่มโค้งมน
+        alignItems: "center",
+        marginVertical: 10,
+        width: 304,
+        height: 49,
+        backgroundColor: "#13714C",
+        alignSelf: "center",
+        zIndex: 20,
+      }}
+      onPress={addSummary} >
+      <Text style={myStyle.buttonText}>ตอบรับ</Text>
+    </TouchableOpacity>
 
-        <TouchableOpacity
-          style={{
-            marginTop: 30,
-            backgroundColor: "#307A59",
-            paddingVertical: 12,
-            paddingHorizontal: 25,
-            borderRadius: 10,
-            alignItems: "center",
-            marginVertical: 10,
-            cursor: "pointer",
-            width: 312,
-            alignSelf: "center",
-          }}
-          onPress={addSummary}
-        >
-          <Text style={myStyle.buttonText}>รับ</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 }

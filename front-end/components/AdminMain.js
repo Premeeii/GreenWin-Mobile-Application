@@ -10,12 +10,14 @@ import {
   Alert,
   Modal,
 } from "react-native";
+
 import { Dropdown } from "react-native-element-dropdown";
 import { myStyle } from "../styles/mystyle";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import Feather from "@expo/vector-icons/Feather";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import Foundation from "@expo/vector-icons/Foundation";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
@@ -120,6 +122,16 @@ export function AdminMain() {
     setShowDetail(false);
   };
 
+  const rejectRegister = async () => {
+    const response = await fetch(
+      `http://10.0.2.2:8080/api/deltriderregister/${selectRegister.username}`,
+      {
+        method: "DELETE",
+      }
+    );
+    setShowDetail(false);
+  };
+
   useEffect(() => {
     fetchUsers(); // โหลดข้อมูลตอนเปิดหน้านี้
 
@@ -212,14 +224,6 @@ export function AdminMain() {
           </Text>
           <Text style={{ fontWeight: "600", color: "#333" }}>{user.tel}</Text>
         </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("EditProfile")}
-          style={{ marginBottom: 42 }}
-        >
-          <View>
-            <Feather name="edit" size={18} color="#666967" />
-          </View>
-        </TouchableOpacity>
       </View>
 
       <Modal transparent={true} visible={logoutConfirm} animationType="fade">
@@ -286,11 +290,11 @@ export function AdminMain() {
           renderItem={({ item }) => (
             <View
               style={{
-                backgroundColor: "#E1DADA",
+                backgroundColor: "#e8dfdfff",
                 marginBottom: 12,
                 padding: 10,
                 zIndex: 10,
-                borderRadius: 8,
+                borderRadius: 15,
                 marginHorizontal: 20,
               }}
             >
@@ -301,11 +305,33 @@ export function AdminMain() {
                   console.log(selectRegister);
                 }}
               >
-                <Text>
-                  ชื่อจริง:{item.riderFirstname} นามสกุล:{item.riderLastname}
-                </Text>
-                <Text>ชื่อผู้ใช้งาน:{item.username}</Text>
-                <Text>จุดที่ประจำ:{item.riderLocation}</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>วันที่: </Text>
+                  <Text>
+                    {new Date(item.registerTime).toLocaleDateString("th-TH")}{" "}
+                  </Text>
+                  <Text style={{ fontWeight: "bold" }}>เวลา: </Text>
+                  <Text>
+                    {new Date(item.registerTime).toLocaleTimeString("th-TH")}{" "}
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>ชื่อจริง: </Text>
+                  <Text>{item.riderFirstname} </Text>
+                  <Text style={{ fontWeight: "bold" }}>นามสกุล: </Text>
+                  <Text>{item.riderLastname}</Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>ชื่อผู้ใช้งาน: </Text>
+                  <Text>{item.username}</Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>จุดที่ประจำ:</Text>
+                  <Text>{item.riderLocation}</Text>
+                </View>
               </TouchableOpacity>
             </View>
           )}
@@ -341,6 +367,17 @@ export function AdminMain() {
               alignSelf: "center",
             }}
           >
+            <TouchableOpacity onPress={() => setShowDetail(false)}>
+              <Image
+                source={require("../assets/close.png")}
+                style={{
+                  width: 20,
+                  height: 20,
+                  position: "absolute",
+                  marginLeft: 300,
+                }}
+              />
+            </TouchableOpacity>
             {selectRegister && (
               <>
                 <Text
@@ -348,21 +385,69 @@ export function AdminMain() {
                 >
                   ข้อมูลวินมอเตอร์ไซค์
                 </Text>
-                <Text>
-                  ชื่อ: {selectRegister.riderFirstname}{" "}
-                  {selectRegister.riderLastname}
-                </Text>
-                <Text>ชื่อผู้ใช้: {selectRegister.username}</Text>
-                <Text>อีเมล: {selectRegister.email}</Text>
-                <Text>รหัส: {selectRegister.password}</Text>
-                <Text>เบอร์โทร: {selectRegister.tel}</Text>
-                <Text>
-                  รถ: {selectRegister.brandVehicle}{" "}
-                  {selectRegister.modelVehicle}
-                </Text>
-                <Text>ทะเบียน: {selectRegister.license}</Text>
-                <Text>จุดประจำ: {selectRegister.riderLocation}</Text>
-                <Text>เลขใบอนุญาตขับขี่: {selectRegister.riderLicense}</Text>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>วันที่: </Text>
+                  <Text>
+                    {new Date(selectRegister.registerTime).toLocaleDateString(
+                      "th-TH"
+                    )}{" "}
+                  </Text>
+                  <Text style={{ fontWeight: "bold" }}>เวลา: </Text>
+                  <Text>
+                    {new Date(selectRegister.registerTime).toLocaleTimeString(
+                      "th-TH"
+                    )}{" "}
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>ชื่อ: </Text>
+                  <Text>
+                    {selectRegister.riderFirstname}{" "}
+                    {selectRegister.riderLastname}
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>ชื่อผู้ใช้: </Text>
+                  <Text>{selectRegister.username}</Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>อีเมล: </Text>
+                  <Text>{selectRegister.email}</Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>รหัส: </Text>
+                  <Text>{selectRegister.password}</Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>เบอร์โทร: </Text>
+                  <Text>{selectRegister.tel}</Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>รถ: </Text>
+                  <Text>
+                    {selectRegister.brandVehicle} {selectRegister.modelVehicle}
+                  </Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>ทะเบียน: </Text>
+                  <Text>{selectRegister.license}</Text>
+                </View>
+
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>จุดประจำ:</Text>
+                  <Text>{selectRegister.riderLocation}</Text>
+                </View>
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontWeight: "bold" }}>เลขใบอนุญาตขับขี่: </Text>
+                  <Text>{selectRegister.riderLicense}</Text>
+                </View>
               </>
             )}
             <TouchableOpacity
@@ -381,11 +466,11 @@ export function AdminMain() {
                   fontWeight: "bold",
                 }}
               >
-                ยืนยัน
+                อนุมัติ
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setShowDetail(false)}
+              onPress={rejectRegister}
               style={{
                 backgroundColor: "#f3160fff",
                 paddingVertical: 8,
@@ -400,7 +485,7 @@ export function AdminMain() {
                   fontWeight: "bold",
                 }}
               >
-                ปิด
+                ไม่อนุมัติ
               </Text>
             </TouchableOpacity>
           </View>

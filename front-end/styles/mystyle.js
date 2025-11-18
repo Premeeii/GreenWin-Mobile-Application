@@ -236,7 +236,7 @@ export const myStyle = StyleSheet.create({
     marginVertical: 20,
     cursor: "pointer",
     width: 312,
-    alignSelf: "center",
+    alignSelf: "center", 
     bottom: 300,
   },
   requestbox: {
@@ -276,15 +276,15 @@ export const myStyle = StyleSheet.create({
   confirmPopup: {
     width: 373,
     height: 240,
-    backgroundColor: "#DAEEE5",
+    backgroundColor: "#ffffffff",
     borderRadius: 10,
     justifyContent: "center",
   },
 
   logoutPopup: {
-    width: 273,
-    height: 181,
-    backgroundColor: "#DAEEE5",
+    width: 275,
+    height: 150,
+    backgroundColor: "#ffffffff",
     borderRadius: 10,
     justifyContent: "center",
   },
@@ -297,20 +297,24 @@ export const myStyle = StyleSheet.create({
   },
 
   acceptButton: {
-    width: 110,
-    height: 32,
+    width: 115,
+    height: 37,
     borderRadius: 10,
-    backgroundColor: "#E55555",
+    backgroundColor: "#4454E7",
     alignItems: "center",
-    marginRight: 15,
+    marginTop: 10,
+    justifyContent: "center",
+    marginRight:10,
   },
 
   cancelButton: {
-    width: 110,
-    height: 32,
+    width: 115,
+    height: 37,
     borderRadius: 10,
-    backgroundColor: "#F8F8F8",
+    backgroundColor: "#f3eeeeff",
     alignItems: "center",
+    marginTop: 10,
+    justifyContent: "center",
   },
   //////////////////
   //////////////////

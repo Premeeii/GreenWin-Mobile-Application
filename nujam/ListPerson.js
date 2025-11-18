@@ -378,7 +378,7 @@ export function ListPerson() {
                 fontSize: 20,
                 alignSelf: "center",
                 marginBottom: 20,
-              }}
+              }} 
             >
               ยืนยันการเรียก
             </Text>
@@ -515,6 +515,19 @@ export function ListPerson() {
               </TouchableOpacity>
             </View>
           </View>
+
+
+
+
+
+
+
+
+
+
+
+
+          
         </View>
       </Modal>
 

@@ -508,7 +508,7 @@ export function ListPerson() {
                   style={{
                     fontWeight: "bold",
                     fontSize: 16,
-                    marginVertical: 2,
+                    alignItems: "center",
                   }}
                 >
                   ยกเลิก

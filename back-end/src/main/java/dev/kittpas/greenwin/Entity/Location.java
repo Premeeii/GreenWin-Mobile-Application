@@ -9,10 +9,11 @@ import jakarta.persistence.Table;
 @Table(name = "location")
 public class Location {
 
+    @Id
     @Column(name = "pickupName1")
     private String pickupName1;
 
-    @Id
+    
     @Column(name = "pickupName2")
     private String pickupName2;
 

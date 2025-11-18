@@ -1,5 +1,7 @@
 package dev.kittpas.greenwin.Entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,6 +14,10 @@ public class RiderRegister {
     @Id
     @Column(name = "personId", length = 13)
     private String personId;
+
+    @CreationTimestamp
+    @Column(name = "registerTime")
+    private String registerTime;
 
     @Column(name = "riderFirstname")
     private String riderFirstname;
@@ -146,9 +152,17 @@ public class RiderRegister {
         this.tel = tel;
     }
 
+        public String getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(String registerTime) {
+        this.registerTime = registerTime;
+    }
+
     public RiderRegister(String personId, String riderFirstname, String riderLastname, String brandVehicle,
             String modelVehicle, String license, String riderLicense, String riderLocation, String username,
-            String password, String email,  String tel) {
+            String password, String email,  String tel, String registerTime) {
         this.personId = personId;
         this.riderFirstname = riderFirstname;
         this.riderLastname = riderLastname;
@@ -161,6 +175,9 @@ public class RiderRegister {
         this.password = password;
         this.email = email;
         this.tel = tel;
+        this.registerTime = registerTime;
     }
+
+
 
 }

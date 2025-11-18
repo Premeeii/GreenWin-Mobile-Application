@@ -116,10 +116,28 @@ export function RiderRegister2() {
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           จุดที่ประจำ
         </Text>
-        <TextInput
+        <Dropdown
           style={myStyle.inputreg}
-          value={riderLocation}
-          onChangeText={setRiderLocation}
+          data={dropdownLocation}
+          labelField="label"
+          valueField="value"
+          placeholder=""
+          maxHeight={200}
+          value={selectLocation}
+          onChange={(item) => {
+              setSelectLocation(item.value);
+          }}
+          renderItem={(item) => (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                padding: 15,
+              }}
+            >
+              <Text>{item.label}</Text>
+            </View>
+          )}
         />
 
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>

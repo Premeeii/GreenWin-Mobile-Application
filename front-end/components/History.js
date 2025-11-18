@@ -90,22 +90,40 @@ export function History() {
           data={history}
           keyExtractor={(item) => item.summaryid.toString()}
           renderItem={({ item }) => (
-
             <View
               style={{
                 backgroundColor: "#ffffff70",
                 marginBottom: 12,
                 padding: 10,
-                
+
                 borderRadius: 8,
-                marginHorizontal:20
+                marginHorizontal: 20,
               }}
             >
-              <Text>เวลา: {new Date(item.timeStamp).toLocaleString("th-TH")}</Text>
-              <Text>จุดรับ: {item.pickupName1}</Text>
-              <Text>จุดหมาย: {item.destination}</Text>
-              <Text>วิน: {item.riderLocation}</Text>
-              <Text>สถานะ: {item.status}</Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold" }}>เวลา: </Text>
+                <Text>{new Date(item.timeStamp).toLocaleString("th-TH")}</Text>
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold" }}>จุดรับ: </Text>
+                <Text>{item.pickupName1}</Text>
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold" }}>จุดหมาย: </Text>
+                <Text>{item.destination}</Text>
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold" }}>วิน: </Text>
+                <Text>{item.riderLocation}</Text>
+              </View>
+
+              <View style={{ flexDirection: "row" }}>
+                <Text style={{ fontWeight: "bold" }}>สถานะ: </Text>
+                <Text>{item.status}</Text>
+              </View>
             </View>
           )}
         />
