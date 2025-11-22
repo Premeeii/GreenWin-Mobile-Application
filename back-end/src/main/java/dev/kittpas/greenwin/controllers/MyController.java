@@ -38,6 +38,7 @@ import dev.kittpas.greenwin.Service.SummaryService;
 import dev.kittpas.greenwin.config.JwtUtil;
 import dev.kittpas.greenwin.dto.DataResponse;
 import dev.kittpas.greenwin.dto.EditPersonRequest;
+import dev.kittpas.greenwin.dto.EditRiderRequest;
 import dev.kittpas.greenwin.dto.LoginRequest;
 import dev.kittpas.greenwin.dto.RiderLoginRequest;
 import dev.kittpas.greenwin.dto.RiderResponse;
@@ -249,6 +250,26 @@ public class MyController {
 
         simpMessagingTemplate.convertAndSend("/topic/riderLocation", updatedRider);
         return updatedRider;
+    }
+
+    @PatchMapping("/editrider/{id}")
+    public ResponseEntity<?> editRider(@PathVariable int id, @RequestBody EditRiderRequest request){
+        try{
+            Rider update = riderService.updateRider(id, request);
+            return ResponseEntity.ok(update);
+        }catch(RuntimeException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PatchMapping("/statuslogin/{username}")
+    public Rider statusRiderLogin(@PathVariable String username){
+        return riderService.riderLogin(username);
+    }
+
+    @PatchMapping("/statuslogout/{username}")
+    public Rider statusRiderLogout(@PathVariable String username){
+        return riderService.riderLogout(username);
     }
 
     // Test Jwt

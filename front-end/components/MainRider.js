@@ -102,6 +102,23 @@ export function MainRider() {
     } catch (error) {
       console.error("Fail" + error);
     }
+
+    try {
+      const response = await fetch(
+        `http://10.0.2.2:8080/api/statuslogout/${rider.username}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        console.log("อัปสเตตัสเรียบร้อย");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const requestCard = ({ item }) => (
@@ -115,13 +132,15 @@ export function MainRider() {
       style={{ opacity: Active ? 1 : 0.4 }}
     >
       <View style={myStyle.selectrequest}>
-        <Text style={{ fontWeight: "bold", fontSize: 14, }}>
+        <Text style={{ fontWeight: "bold", fontSize: 14 }}>
           {item.fname} {item.lname}
         </Text>
-        <Text style={{ fontWeight: "bold", fontSize: 14, paddingTop: 2, }}> 
+        <Text style={{ fontWeight: "bold", fontSize: 14, paddingTop: 2 }}>
           จุดรับ: {item.pickupName1}
         </Text>
-        <Text style={{ fontWeight: "bold", fontSize: 14, paddingTop: 2, }}>ไป: {item.destination}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 14, paddingTop: 2 }}>
+          ไป: {item.destination}
+        </Text>
       </View>
     </TouchableOpacity>
   ); //แก้ ที่รับเป็นตัวอ่อน
@@ -189,27 +208,27 @@ export function MainRider() {
   }, [riderLocation]);
 
   return (
-    <View style={{flex:1, backgroundColor: "#F8F8F8",}}>
-       <View style={myStyle.headerHome}>
-                <View style={myStyle.headerTitle}>
-                  <Text style={myStyle.greenwin}>GreenWin</Text>
-                </View>
-      
-                <Image
-                  source={require("../assets/tophome.png")}
-                  style={{ width: "100%", height: "100%"}}
-                  resizeMode="cover"
-                />
-              </View>
-      
+    <View style={{ flex: 1, backgroundColor: "#F8F8F8" }}>
+      <View style={myStyle.headerHome}>
+        <View style={myStyle.headerTitle}>
+          <Text style={myStyle.greenwin}>GreenWin</Text>
+        </View>
+
+        <Image
+          source={require("../assets/tophome.png")}
+          style={{ width: "100%", height: "100%" }}
+          resizeMode="cover"
+        />
+      </View>
+
       <View style={myStyle.mainprofile}>
         <View style={myStyle.avater}>
-        <Image
-          source={
-            imageUri ? { uri: imageUri } : require("../assets/account.png")
-          }
-          style={{ width: "100%", height: "100%", }}
-        ></Image>
+          <Image
+            source={
+              imageUri ? { uri: imageUri } : require("../assets/account.png")
+            }
+            style={{ width: "100%", height: "100%" }}
+          ></Image>
         </View>
         <View style={{ marginLeft: 15 }}>
           <View
@@ -217,7 +236,8 @@ export function MainRider() {
           >
             <Text
               style={{
-                color: "#7b8a7f", fontSize: 12,
+                color: "#7b8a7f",
+                fontSize: 12,
               }}
             >
               @{rider.username}
@@ -225,44 +245,66 @@ export function MainRider() {
           </View>
           <Text
             style={{
-              marginTop: 6, fontWeight: "600", fontSize: 14
+              marginTop: 6,
+              fontWeight: "600",
+              fontSize: 14,
             }}
           >
             {rider.rider_firstname} {rider.rider_lastname}
           </Text>
           <Text
             style={{
-              marginTop: 6, fontWeight: "600", fontSize: 12
+              marginTop: 6,
+              fontWeight: "600",
+              fontSize: 12,
             }}
           >
             {rider.vehicle} | {rider.license}
           </Text>
           <Text
             style={{
-              marginTop: 6, fontWeight: "600", fontSize: 12
+              marginTop: 6,
+              fontWeight: "600",
+              fontSize: 12,
             }}
           >
             {rider.riderLocation}
           </Text>
           <Text
             style={{
-              marginTop: 6, fontWeight: "600", fontSize: 12
+              marginTop: 6,
+              fontWeight: "600",
+              fontSize: 12,
             }}
           >
             {rider.tel}
           </Text>
         </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EditRiderProfile")}
+          style={{ marginBottom: 100 }}
+        >
+          <View>
+            <Feather name="edit" size={18} color="#666967" />
+          </View>
+        </TouchableOpacity>
       </View>
 
-      <View style={{ flexDirection: "row", marginTop: 80,  zIndex: 10, marginLeft:20}}>
-      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: 80,
+          zIndex: 10,
+          marginLeft: 20,
+        }}
+      ></View>
       <Text
         style={{
           fontWeight: "bold",
           fontSize: 20,
-          marginBottom:10,
+          marginBottom: 10,
           marginLeft: 30,
-          zIndex:10
+          zIndex: 10,
         }}
       >
         กล่องคำร้อง
@@ -341,7 +383,6 @@ export function MainRider() {
           />
         </TouchableOpacity>
       </View>
-
     </View>
   );
 }
