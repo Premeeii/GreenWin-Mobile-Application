@@ -41,8 +41,8 @@ public class RiderService {
             if (request.getTel() != null) {
                 rider.setTel(request.getTel());
             }
-            if (request.getImageRider() != null) {
-                rider.setRiderImage(request.getImageRider());
+            if (request.getRiderImage() != null) {
+                rider.setRiderImage(request.getRiderImage());
             }
             return riderRepository.save(rider);
         } else {

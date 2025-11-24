@@ -1,14 +1,14 @@
 package dev.kittpas.greenwin.dto;
 
 public class EditRiderRequest {
-    private String imageRider;
+    private String riderImage;
     private String tel;
 
-    public String getImageRider() {
-        return imageRider;
+    public String getRiderImage() {
+        return riderImage;
     }
-    public void setImageRider(String imageRider) {
-        this.imageRider = imageRider;
+    public void setRiderImage(String riderImage) {
+        this.riderImage = riderImage;
     }
     public String getTel() {
         return tel;
@@ -17,8 +17,8 @@ public class EditRiderRequest {
         this.tel = tel;
     }
     
-    public EditRiderRequest(String imageRider, String tel) {
-        this.imageRider = imageRider;
+    public EditRiderRequest(String riderImage, String tel) {
+        this.riderImage = riderImage;
         this.tel = tel;
     }
 

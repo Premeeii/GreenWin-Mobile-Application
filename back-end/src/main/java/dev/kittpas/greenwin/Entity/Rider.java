@@ -35,7 +35,6 @@ public class Rider {
     @Column(name = "vehicle")
     private String vehicle;
     
-    
     @Column(name = "riderLocation")
     private String riderLocation;
 

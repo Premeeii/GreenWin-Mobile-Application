@@ -76,6 +76,9 @@ export function AddPerson() {
       tempError.username = "กรุณากรอกชื่อผู้ใช้งาน";
       valid = false;
     }
+    if(username.length < 5){
+      tempError.username = "กรุณากรอกชื่อผู้ใช้งานอย่างน้อย 5 ตัว"
+    }
     if (!password) {
       tempError.password = "กรุณากรอกรหัสผ่าน";
       valid = false;

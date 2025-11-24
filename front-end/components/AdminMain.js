@@ -92,7 +92,7 @@ export function AdminMain() {
           rider_lastname: selectRegister.riderLastname,
           password: selectRegister.password,
           tel: selectRegister.tel,
-          vehicle: selectRegister.brandVehicle,
+          vehicle: `${selectRegister.brandVehicle} ${selectRegister.modelVehicle}`,
           riderLocation: selectRegister.riderLocation,
           license: selectRegister.license,
         }),

@@ -118,7 +118,7 @@ export function EditRiderProfile() {
         await AsyncStorage.setItem("LoggedRider", JSON.stringify(UpdateRider));
         console.log(riderImage);
         console.log("เซฟข้อมูล");
-        navigation.goBack();
+        navigation.navigate("MainRider", {skipAvailable: true})
       }
     } catch (error) {
       console.log("error", error);
@@ -129,6 +129,7 @@ export function EditRiderProfile() {
     loadRider();
     console.log(rider);
     console.log(id);
+    console.log(riderImage);
   }, []);
 
   return (
@@ -137,7 +138,7 @@ export function EditRiderProfile() {
         <View style={myStyle.headerTitle}>
           <Text style={myStyle.greenwin}>บัญชีผู้ใช้</Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("MainRider")}>
+        <TouchableOpacity onPress={() => navigation.navigate("MainRider", {skipAvailable:true})}>
           <Image
             source={require("../assets/iconleft.png")}
             style={{ width: 25, height: 25, marginTop: -45, marginLeft: 40 }}

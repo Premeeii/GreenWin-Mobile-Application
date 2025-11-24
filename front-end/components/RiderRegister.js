@@ -33,7 +33,6 @@ export function RiderRegister() {
       !license || 
       personId.length < 13
     ) {
-      Alert.alert("โปรดกรอกข้อมูลให้ครบถ้วน");
       return;
     }
     await AsyncStorage.setItem(
@@ -135,7 +134,7 @@ export function RiderRegister() {
         <Text style={{ color: "red" }}>{errors.brandVehicle}</Text>
 
         <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-          รุ่นของรถมอเตอร์ไซค์
+          รุ่นและสีของรถมอเตอร์ไซค์
         </Text>
         <TextInput
           style={myStyle.inputreg}

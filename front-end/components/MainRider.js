@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
 import Feather from "@expo/vector-icons/Feather";
 import { myStyle } from "../styles/mystyle";
 import SockJS from "sockjs-client";
@@ -27,6 +27,7 @@ export function MainRider() {
 
   const isFocus = useIsFocused();
   const navigation = useNavigation();
+  const routes = useRoute();
 
   const loadRider = async () => {
     const stored = await AsyncStorage.getItem("LoggedRider");
@@ -202,6 +203,11 @@ export function MainRider() {
   }, [isFocus]);
 
   useEffect(() => {
+    if(routes.params?.skipAvailable){
+      console.log("กลับจาก Edit → ไม่เรียก availableRider()");
+       return;
+    }
+
     if (riderLocation) {
       availableRider();
     }
@@ -282,7 +288,7 @@ export function MainRider() {
         </View>
         <TouchableOpacity
           onPress={() => navigation.navigate("EditRiderProfile")}
-          style={{ marginBottom: 100 }}
+          style={{position:'absolute', marginLeft:320, marginBottom:100 }}
         >
           <View>
             <Feather name="edit" size={18} color="#666967" />
