@@ -288,6 +288,7 @@ export function ListPerson() {
           labelField="label"
           valueField="value"
           placeholder=""
+          autoScroll={false} 
           maxHeight={200}
           value={selectLocation1}
           onChange={(item) => {
@@ -329,6 +330,7 @@ export function ListPerson() {
           labelField="label"
           valueField="value"
           placeholder=""
+          autoScroll={false} 
           maxHeight={200}
           value={selectRider}
           onChange={(item) => {

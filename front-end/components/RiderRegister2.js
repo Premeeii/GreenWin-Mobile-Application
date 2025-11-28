@@ -24,6 +24,7 @@ export function RiderRegister2() {
   const [tel, setTel] = useState("");
   const [saveData, setSaveData] = useState([]);
   const [uploadStatus, setUploadStatus] = useState("");
+  const [errors, setErrors] = useState({});
 
   const navigation = useNavigation();
   const isFocus = useIsFocused();
@@ -61,6 +62,20 @@ export function RiderRegister2() {
   };
 
   const handleRiderRegister = async () => {
+    if(!validate()){
+      return;
+    }
+
+    if (
+      !riderLicense ||
+      !selectLocation ||
+      !username ||
+      !password ||
+      !email ||
+      !tel
+    ) {
+      return;
+    }
     try {
       const response = await fetch("http://10.0.2.2:8080/api/riderregister", {
         method: "POST",
@@ -95,6 +110,44 @@ export function RiderRegister2() {
     }
   };
 
+  const validate = () => {
+    let valid = true;
+    let tempError = {};
+
+    if (!riderLicense) {
+      tempError.riderLicense = "กรุณากรอกเลขใบอนุญาตขับขี่";
+      let valid = false;
+    }
+
+    if (!selectLocation) {
+      tempError.selectLocation = "กรุณาเลือกจุดที่ประจำ";
+      let valid = false;
+    }
+
+    if (!username) {
+      tempError.username = "กรุณากรอกชื่อผู้ใช้งาน";
+      let valid = false;
+    }
+
+    if (!password) {
+      tempError.password = "กรุณากรอกรหัสผ่าน";
+      let valid = false;
+    }
+
+    if (!email) {
+      tempError.email = "กรุณากรอกอีเมลล์";
+      let valid = false;
+    }
+
+    if (!tel) {
+      tempError.tel = "กรุณากรอกเบอร์โทร";
+      let valid = false;
+    }
+
+    setErrors(tempError);
+    return valid;
+  };
+
   useEffect(() => {
     if (isFocus) {
       LoadData();
@@ -113,6 +166,8 @@ export function RiderRegister2() {
           value={riderLicense}
           onChangeText={setRiderLicense}
         />
+        <Text style={{ color: "red" }}>{errors.riderLicense}</Text>
+
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           จุดที่ประจำ
         </Text>
@@ -125,7 +180,7 @@ export function RiderRegister2() {
           maxHeight={200}
           value={selectLocation}
           onChange={(item) => {
-              setSelectLocation(item.value);
+            setSelectLocation(item.value);
           }}
           renderItem={(item) => (
             <View
@@ -139,6 +194,7 @@ export function RiderRegister2() {
             </View>
           )}
         />
+        <Text style={{ color: "red" }}>{errors.selectLocation}</Text>
 
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           ชื่อผู้ใช้งาน
@@ -148,15 +204,18 @@ export function RiderRegister2() {
           value={username}
           onChangeText={setUsername}
         />
+        <Text style={{ color: "red" }}>{errors.username}</Text>
 
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           รหัสผ่าน
         </Text>
+        
         <TextInput
           style={myStyle.inputreg}
           value={password}
           onChangeText={setPassword}
         />
+       <Text style={{ color: "red" }}>{errors.password}</Text>
 
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           อีเมลล์
@@ -166,11 +225,13 @@ export function RiderRegister2() {
           value={email}
           onChangeText={setEmail}
         />
+        <Text style={{ color: "red" }}>{errors.email}</Text>
 
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           เบอร์โทร
         </Text>
         <TextInput style={myStyle.inputreg} value={tel} onChangeText={setTel} />
+        <Text style={{ color: "red" }}>{errors.tel}</Text>
 
         <TouchableOpacity
           style={{
