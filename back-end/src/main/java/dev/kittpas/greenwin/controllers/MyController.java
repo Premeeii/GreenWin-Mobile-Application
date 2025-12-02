@@ -86,11 +86,24 @@ public class MyController {
     }
 
     @PostMapping("/add") // Create
-    public Person addPerson(@RequestBody Person person) {
+    public ResponseEntity<?> addPerson(@RequestBody Person person) {
+
+        // ตรวจสอบว่า username มีอยู่แล้ว
+        if (personService.existsByUsername(person.getUsername())) {
+            // ส่ง HTTP 409 Conflict พร้อมข้อความ
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Username already exists");
+        }
+
+        // Hash password
         String plainPassword = person.getPassword();
-        String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt()); // Encryptionรหัส
+        String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
         person.setPassword(hashedPassword);
-        return personService.addPerson(person);
+
+        // บันทึกลง database
+        Person savedPerson = personService.addPerson(person);
+        return ResponseEntity.ok(savedPerson);
     }
 
     @DeleteMapping("/delete/{id_key}")
@@ -233,7 +246,7 @@ public class MyController {
         simpMessagingTemplate.convertAndSend("/topic/delete-summary", customerUsername);
         summaryService.deleteSummary(customerUsername);
         requestService.deleteRequest(customerUsername);
-        
+
     }
 
     @PostMapping("available/{riderLocation}")
@@ -253,22 +266,22 @@ public class MyController {
     }
 
     @PatchMapping("/editrider/{id}")
-    public ResponseEntity<?> editRider(@PathVariable int id, @RequestBody EditRiderRequest request){
-        try{
+    public ResponseEntity<?> editRider(@PathVariable int id, @RequestBody EditRiderRequest request) {
+        try {
             Rider update = riderService.updateRider(id, request);
             return ResponseEntity.ok(update);
-        }catch(RuntimeException e){
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
     @PatchMapping("/statuslogin/{username}")
-    public Rider statusRiderLogin(@PathVariable String username){
+    public Rider statusRiderLogin(@PathVariable String username) {
         return riderService.riderLogin(username);
     }
 
     @PatchMapping("/statuslogout/{username}")
-    public Rider statusRiderLogout(@PathVariable String username){
+    public Rider statusRiderLogout(@PathVariable String username) {
         return riderService.riderLogout(username);
     }
 
@@ -310,27 +323,26 @@ public class MyController {
 
         return historyService.addHistory(history);
     }
-    
+
     @GetMapping("/findhistory/{customerUsername}")
-    public List<History> getUserHistory(@PathVariable String customerUsername){
+    public List<History> getUserHistory(@PathVariable String customerUsername) {
         return historyService.getHistoryByUser(customerUsername);
     }
 
-    //RiderRegister
+    // RiderRegister
     @PostMapping("/riderregister")
-    public RiderRegister riderRegister(@RequestBody RiderRegister riderRegister){
+    public RiderRegister riderRegister(@RequestBody RiderRegister riderRegister) {
         return riderRegisterService.addriderRegister(riderRegister);
     }
 
     @GetMapping("/getriderregister")
-    public List<RiderRegister> findRiderRegister(){
+    public List<RiderRegister> findRiderRegister() {
         return riderRegisterService.getRiderRegister(riderRegisterService);
     }
 
     @DeleteMapping("/deltriderregister/{username}")
-    public void deleteRiderRegister(@PathVariable String username){
+    public void deleteRiderRegister(@PathVariable String username) {
         riderRegisterService.deleteRiderRegister(username);
     }
-    
 
 }

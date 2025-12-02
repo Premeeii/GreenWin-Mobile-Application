@@ -28,6 +28,7 @@ export function RequestDetail({ route }) {
   const [riderTel, setRiderTel] = useState("");
   const [riderImage, setRiderImage] = useState("");
   const [customerImage, setCustomerImage] = useState(request.customerImage);
+  const [description, setDescription] = useState(request.description);
 
   const loadRider = async () => {
     const stored = await AsyncStorage.getItem("LoggedRider");
@@ -68,6 +69,7 @@ export function RequestDetail({ route }) {
           vehicle,
           riderImage: riderImage,
           customerImage: customerImage,
+          description,
         }),
       });
 
@@ -208,7 +210,10 @@ export function RequestDetail({ route }) {
         เลือกจุดที่ต้องการให้มารับ
       </Text>
       <Text style={{ color: "black", marginTop: 5, fontSize: 16, fontWeight: "500", marginLeft: 15, }}>
-        {request.pickupName1}, {request.pickupName2}
+        {request.pickupName1}
+      </Text>
+      <Text style={{ color: "gray", marginTop: 5, fontSize: 16, fontWeight: "500", marginLeft: 15, }}>
+        {request.description}
       </Text>
       <Text style={{ color: "#000", fontWeight: "bold", fontSize: 16, marginLeft: 15, marginTop: 10, }}>
         เลือกจุดให้บริการวินมอเตอร์ไซค์สีเขียว

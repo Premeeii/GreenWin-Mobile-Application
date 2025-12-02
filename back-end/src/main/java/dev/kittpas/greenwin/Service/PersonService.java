@@ -15,57 +15,58 @@ public class PersonService {
 
     @Autowired
     private PersonRepository personRepository;
-    
 
-    public List<Person> findPerson(Person person) { //ดึงข้อมูล
+    public List<Person> findPerson(Person person) { // ดึงข้อมูล
         return personRepository.findAll();
     }
 
-    public List<Person> searchName(String keyword){ //Search
+    public List<Person> searchName(String keyword) { // Search
         return personRepository.findByFnameContainingIgnoreCase(keyword);
     }
 
-    public Person addPerson(Person person){ //Create
+    public Person addPerson(Person person) { // Create
         return personRepository.save(person);
     }
 
-    public void deletPerson(int id_key){ 
+    public boolean existsByUsername(String username) {
+        return personRepository.existsByUsername(username);
+    }
+
+    public void deletPerson(int id_key) {
         personRepository.deleteById(id_key);
     }
 
-    public Optional<Person> loginPerson(String username){
+    public Optional<Person> loginPerson(String username) {
         return personRepository.findByUsername(username);
-                
+
     }
 
-    public Person updatePerson(int id, EditPersonRequest request){
-        Optional<Person> personOp = personRepository.findById(id); //ดึงข้อมูลจากidที่loginเข้ามา
+    public Person updatePerson(int id, EditPersonRequest request) {
+        Optional<Person> personOp = personRepository.findById(id); // ดึงข้อมูลจากidที่loginเข้ามา
 
-        if(personOp.isPresent()){
+        if (personOp.isPresent()) {
             Person person = personOp.get();
 
-            if(request.getFname() != null){
+            if (request.getFname() != null) {
                 person.setFname(request.getFname());
             }
-            if(request.getLname() != null){
+            if (request.getLname() != null) {
                 person.setLname(request.getLname());
             }
-            if(request.getTel() != null){
+            if (request.getTel() != null) {
                 person.setTel(request.getTel());
             }
-            if(request.getPassword() != null){
+            if (request.getPassword() != null) {
                 person.setPassword(request.getPassword());
             }
-            if(request.getImageUri() != null){
-                person.setImageURI(request.getImageUri()); //เซฟลงimageURIโดยใช้ requestของImageUri (กูใช้Formatผิด)
+            if (request.getImageUri() != null) {
+                person.setImageURI(request.getImageUri()); // เซฟลงimageURIโดยใช้ requestของImageUri (กูใช้Formatผิด)
             }
             return personRepository.save(person);
-        }else{
-            throw new  RuntimeException("User not found");
+        } else {
+            throw new RuntimeException("User not found");
         }
 
     }
 
-
 }
-

@@ -1,4 +1,11 @@
-import { View, Text, TouchableOpacity, Modal, Animated, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+  Animated,
+  Image,
+} from "react-native";
 import { useState, useEffect, useRef } from "react";
 import { myStyle } from "../styles/mystyle";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -40,6 +47,7 @@ export function Request() {
         customerTel: request.tel,
         status: "cancel",
         destination: request.destination,
+        description: request.description,
       }),
     });
 
@@ -96,7 +104,7 @@ export function Request() {
     console.log(request);
   }, []);
 
-Animated.loop(
+  Animated.loop(
     Animated.sequence([
       Animated.timing(bounceAnim, {
         toValue: -10,
@@ -112,9 +120,7 @@ Animated.loop(
   ).start();
 
   return (
-
-    <View style={{flex: 1, backgroundColor: '#A4E394'}}>
-      
+    <View style={{ flex: 1, backgroundColor: "#A4E394" }}>
       <View style={myStyle.headerHome}>
         <View style={myStyle.headerTitle}>
           <Text style={myStyle.greenwin}>GreenWin</Text>
@@ -136,7 +142,7 @@ Animated.loop(
         />
         <Image
           source={require("../assets/floor.png")}
-          style={{ 
+          style={{
             position: "absolute",
             bottom: 32, // ความสูงของพื้น
             width: 240,
@@ -149,83 +155,90 @@ Animated.loop(
         <Text style={myStyle.topicRequest}>กำลังเรียกวิน</Text>
       </View>
 
-    <View>
-      <View style={myStyle.mainRequest}>
-        <Text style={myStyle.sectionRequset}>เลือกจุดที่ต้องการให้มารับ</Text>
-        <Text style={myStyle.contentRequest}>
-          {request.pickupName1}, {request.pickupName2}
-        </Text>
-        <Text style={myStyle.sectionRequset}>
-          เลือกจุดให้บริการวินมอเตอร์ไซค์สีเขียว
-        </Text>
-        <Text style={myStyle.contentRequest}>{request.riderLocation}</Text>
-        <Text style={myStyle.sectionRequset}>กำหนดจุดหมาย</Text>
-        <Text style={myStyle.contentRequest}>{request.destination}</Text>
-      </View>
-      <Modal transparent={true} visible={cancelConfirm}>
-        <View style={myStyle.overlay}>
-          <View style={myStyle.logoutPopup}>
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 20,
-                alignSelf: "center",
-                marginBottom: 10,
-              }}
-            >
-              ยืนยันการยกเลิก
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                alignSelf: "center",
-                marginTop: 10,
-              }}
-            >
-              <TouchableOpacity
-                style={myStyle.acceptButton}
-                onPress={() => deleteRequest(username)}
+      <View>
+        <View style={myStyle.mainRequest}>
+          <Text style={myStyle.sectionRequset}>เลือกจุดที่ต้องการให้มารับ</Text>
+          <Text style={myStyle.contentRequest}>{request.pickupName1}</Text>
+          <Text style={myStyle.sectionRequset}>
+            เลือกจุดให้บริการวินมอเตอร์ไซค์สีเขียว
+          </Text>
+          <Text style={myStyle.contentRequest}>{request.riderLocation}</Text>
+          <Text
+            style={{
+              color: "gray",
+              marginTop: 5,
+              fontSize: 16,
+              fontWeight: "500",
+             
+            }}
+          >
+            {request.description}
+          </Text>
+          <Text style={myStyle.sectionRequset}>กำหนดจุดหมาย</Text>
+          <Text style={myStyle.contentRequest}>{request.destination}</Text>
+        </View>
+        <Modal transparent={true} visible={cancelConfirm}>
+          <View style={myStyle.overlay}>
+            <View style={myStyle.logoutPopup}>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  alignSelf: "center",
+                  marginBottom: 10,
+                }}
               >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 16,
-                    color: "#fff",
-                    marginVertical: 2,
-                  }}
-                >
-                  ตกลง
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={myStyle.cancelButton}
-                onPress={() => setCancelConfirm(false)}
+                ยืนยันการยกเลิก
+              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignSelf: "center",
+                  marginTop: 10,
+                }}
               >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 16,
-                    marginVertical: 2,
-                  }}
+                <TouchableOpacity
+                  style={myStyle.acceptButton}
+                  onPress={() => deleteRequest(username)}
                 >
-                  ยกเลิก
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 16,
+                      color: "#fff",
+                      marginVertical: 2,
+                    }}
+                  >
+                    ตกลง
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={myStyle.cancelButton}
+                  onPress={() => setCancelConfirm(false)}
+                >
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 16,
+                      marginVertical: 2,
+                    }}
+                  >
+                    ยกเลิก
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-      </Modal>
-      <TouchableOpacity
-        style={myStyle.cancelbutton}
-        onPress={() => setCancelConfirm(true)}
-      >
-        <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>
-          ยกเลิก
-        </Text>
-      </TouchableOpacity>
-    </View>
-
-
+        </Modal>
+        <TouchableOpacity
+          style={myStyle.cancelbutton}
+          onPress={() => setCancelConfirm(true)}
+        >
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 20 }}>
+            ยกเลิก
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

@@ -24,6 +24,7 @@ export function EditRiderProfile() {
   const [license, setLicense] = useState("");
   const [riderImage, setRiderImage] = useState("");
   const [id, setId] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const isFocus = useIsFocused();
   const navigation = useNavigation();
@@ -48,6 +49,8 @@ export function EditRiderProfile() {
   };
 
   const handleUpload = async (photo) => {
+    setUploading(true);
+
     const data = new FormData();
     data.append("file", photo);
     data.append("upload_preset", "greenwin");
@@ -71,6 +74,7 @@ export function EditRiderProfile() {
     } catch (error) {
       console.error("Upload error");
     }
+    setUploading(false); 
   };
 
   const loadRider = async () => {
@@ -88,7 +92,6 @@ export function EditRiderProfile() {
       setRiderImage(setData.riderImage);
       setId(setData.rider_id);
     }
-    
   };
 
   const updateData = async () => {
@@ -118,7 +121,7 @@ export function EditRiderProfile() {
         await AsyncStorage.setItem("LoggedRider", JSON.stringify(UpdateRider));
         console.log(riderImage);
         console.log("เซฟข้อมูล");
-        navigation.navigate("MainRider", {skipAvailable: true})
+        navigation.navigate("MainRider", { skipAvailable: true });
       }
     } catch (error) {
       console.log("error", error);
@@ -138,7 +141,11 @@ export function EditRiderProfile() {
         <View style={myStyle.headerTitle}>
           <Text style={myStyle.greenwin}>บัญชีผู้ใช้</Text>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("MainRider", {skipAvailable:true})}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("MainRider", { skipAvailable: true })
+          }
+        >
           <Image
             source={require("../assets/iconleft.png")}
             style={{ width: 25, height: 25, marginTop: -45, marginLeft: 40 }}
@@ -181,7 +188,7 @@ export function EditRiderProfile() {
           </Text>
         </View>
         <Text style={myStyle.editsection}>ชื่อจริง</Text>
-                <View
+        <View
           style={{
             width: 320,
             height: 49,
@@ -202,7 +209,7 @@ export function EditRiderProfile() {
           </Text>
         </View>
         <Text style={myStyle.editsection}>นามสกุล</Text>
-                <View
+        <View
           style={{
             width: 320,
             height: 49,
@@ -235,6 +242,26 @@ export function EditRiderProfile() {
       >
         <Text style={myStyle.buttonText}>ยืนยัน</Text>
       </TouchableOpacity>
+      
+      {uploading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 999,
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 20, fontWeight: "bold" }}>
+            กำลังอัปโหลดรูปภาพ...
+          </Text>
+        </View>
+      )}
     </View>
   );
 }

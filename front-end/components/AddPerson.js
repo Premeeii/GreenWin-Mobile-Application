@@ -39,7 +39,10 @@ export function AddPerson() {
         body: JSON.stringify({ fname, lname, username, password, tel }), //การส่งjsonเพื่อไปpost
       });
 
-      const reg = await response.json();
+      if (response.status === 409) {
+        const message = await response.text();
+        setErrors((prev) => ({ ...prev, username: "ชื่อผู้ใช้งานซ้ำ" }));
+      }
 
       if (response.ok) {
         //ถ้าstatusเป็นOKจะล้างค่า
@@ -76,8 +79,8 @@ export function AddPerson() {
       tempError.username = "กรุณากรอกชื่อผู้ใช้งาน";
       valid = false;
     }
-    if(username.length < 5){
-      tempError.username = "กรุณากรอกชื่อผู้ใช้งานอย่างน้อย 5 ตัว"
+    if (username.length < 5) {
+      tempError.username = "กรุณากรอกชื่อผู้ใช้งานอย่างน้อย 5 ตัว";
     }
     if (!password) {
       tempError.password = "กรุณากรอกรหัสผ่าน";
@@ -88,6 +91,9 @@ export function AddPerson() {
     }
     if (!tel) {
       tempError.tel = "กรุณากรอกเบอร์โทร";
+      valid = false;
+    } else if (tel.length < 10 || tel.length > 10) {
+      tempError.tel = "กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง";
       valid = false;
     }
 
@@ -117,7 +123,7 @@ export function AddPerson() {
           value={fname} //ตั้งค่าdefaultให้เป็นfnameที่ยังไม่ได้แก้
           onChangeText={setFname} //เปลี่ยนค่า
         />
-        <Text style={{ color: "red",}}>{errors.fname}</Text>
+        <Text style={{ color: "red" }}>{errors.fname}</Text>
 
         <TextInput
           style={myStyle.signinput}
@@ -147,15 +153,19 @@ export function AddPerson() {
         />
         {<Text style={{ color: "red" }}>{errors.password}</Text>}
 
-        <TextInput 
+        <TextInput
           style={myStyle.signinput}
           placeholder="เบอร์โทร"
-          placeholderTextColor="#C1C1C1" 
-          value={tel} 
-          onChangeText={setTel} />
+          placeholderTextColor="#C1C1C1"
+          value={tel}
+          onChangeText={setTel}
+        />
         {<Text style={{ color: "red" }}>{errors.tel}</Text>}
 
-        <TouchableOpacity style={myStyle.signcreatebutoon} onPress={handleRegister}>
+        <TouchableOpacity
+          style={myStyle.signcreatebutoon}
+          onPress={handleRegister}
+        >
           <Text style={myStyle.buttonLogin}>ยืนยัน</Text>
         </TouchableOpacity>
       </View>

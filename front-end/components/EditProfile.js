@@ -22,6 +22,7 @@ export function EditProfile() {
   const [imageUri, setImageUri] = useState("");
   const [image, setImage] = useState("");
   const [user, setUser] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const navigation = useNavigation();
 
@@ -45,6 +46,8 @@ export function EditProfile() {
   };
 
   const handleUpload = async (photo) => {
+    setUploading(true); // ⬅ เริ่มแสดง Loading
+
     const data = new FormData();
     data.append("file", photo);
     data.append("upload_preset", "greenwin");
@@ -68,6 +71,7 @@ export function EditProfile() {
     } catch (error) {
       console.error("Upload error");
     }
+    setUploading(false);
   };
 
   const loadData = async () => {
@@ -136,51 +140,51 @@ export function EditProfile() {
   }, []);
 
   return (
-   <View style={{ backgroundColor: "#fff", flex: 1 }}>
-
+    <View style={{ backgroundColor: "#fff", flex: 1 }}>
       <View style={myStyle.headerHome}>
         <View style={myStyle.headerTitle}>
-            <Text style={myStyle.greenwin}>บัญชีผู้ใช้</Text>
+          <Text style={myStyle.greenwin}>บัญชีผู้ใช้</Text>
         </View>
         <TouchableOpacity onPress={() => navigation.navigate("ListPerson")}>
           <Image
             source={require("../assets/iconleft.png")}
-            style={{ width: 25, height: 25, marginTop: -45, marginLeft: 40 }} 
+            style={{ width: 25, height: 25, marginTop: -45, marginLeft: 40 }}
           />
         </TouchableOpacity>
       </View>
 
-      <View style={{ marginHorizontal: 47, marginTop: 165, }}>
+      <View style={{ marginHorizontal: 47, marginTop: 165 }}>
         <TouchableOpacity onPress={pickAndUploadImage} style={{ zIndex: 10 }}>
           {
             <Image
               source={
                 imageUri ? { uri: imageUri } : require("../assets/account.png")
               } //ถ้ายังไม่มีรูปโปรก็จะใช้อันของที่ให้มาในแอป
-              style={myStyle.imageedit}>
-            </Image>
+              style={myStyle.imageedit}
+            ></Image>
           }
         </TouchableOpacity>
         <Text style={myStyle.editsection}>ชื่อผู้ใช้งาน</Text>
-          <View
+        <View
+          style={{
+            width: 320,
+            height: 49,
+            borderBottomWidth: 3,
+            borderBottomColor: "#F2F2F2",
+            justifyContent: "center",
+            marginBottom: 10,
+          }}
+        >
+          <Text
             style={{
-              width: 320,
-              height: 49,
-              borderBottomWidth: 3, 
-              borderBottomColor: "#F2F2F2",
-              justifyContent: "center",
-              marginBottom: 10,
-            }}
-          >
-          <Text 
-            style={{ 
-              fontSize: 16, 
-              color: "#9f9d9dff", 
+              fontSize: 16,
+              color: "#9f9d9dff",
               fontWeight: "500",
             }}
-          >{user.username}
+          >
+            {user.username}
           </Text>
-          </View>
+        </View>
         <Text style={myStyle.editsection}>ชื่อจริง</Text>
         <TextInput
           style={myStyle.editinput}
@@ -206,6 +210,25 @@ export function EditProfile() {
       >
         <Text style={myStyle.buttonText}>ยืนยัน</Text>
       </TouchableOpacity>
+      {uploading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 999,
+          }}
+        >
+          <Text style={{ color: "#fff", fontSize: 20, fontWeight: "bold" }}>
+            กำลังอัปโหลดรูปภาพ...
+          </Text>
+        </View>
+      )}
     </View>
   );
 }

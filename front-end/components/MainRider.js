@@ -382,6 +382,17 @@ export function MainRider() {
       </Modal>
 
       <View style={myStyle.menu}>
+        <TouchableOpacity onPress={() => loadRequest()}>
+                  <Image
+                    source={require("../assets/refresh.png")}
+                    style={{
+                      width: 25,
+                      height: 25,
+                      resizeMode: "contain",
+                      zIndex: 35,
+                    }}
+                  />
+                </TouchableOpacity>
         <TouchableOpacity onPress={() => setLogoutConfirm(true)}>
           <Image
             source={require("../assets/logout.png")}

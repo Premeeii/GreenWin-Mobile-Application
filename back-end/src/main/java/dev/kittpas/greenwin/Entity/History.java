@@ -64,6 +64,9 @@ public class History {
     @Column(name = "vehicle")
     private String vehicle;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "status")
     private String status;
 
@@ -208,10 +211,18 @@ public class History {
         this.timeStamp = timeStamp;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public History(Integer summaryid, String riderUsername, String riderFname, String riderLname, String license,
             String riderTel, String riderLocation, String pickupName1, String pickupName2, String destination,
             String customerUsername, String customerFname, String customerLname, String customerTel, String vehicle,
-            String status, String timeStamp) {
+            String status, String timeStamp, String description) {
         this.summaryid = summaryid;
         this.riderUsername = riderUsername;
         this.riderFname = riderFname;
@@ -229,12 +240,10 @@ public class History {
         this.vehicle = vehicle;
         this.status = status;
         this.timeStamp = timeStamp;
+        this.description = description;
     }
 
 
-    
-
-    
 
 
 }

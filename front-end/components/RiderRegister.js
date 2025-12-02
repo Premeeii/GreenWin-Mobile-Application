@@ -58,8 +58,8 @@ export function RiderRegister() {
     if (!personId) {
       tempError.personId = "กรุณากรอกเลขบัตรประชาชน";
       let valid = false;
-    } else if (personId.length < 13) {
-      tempError.personId = "กรุณากรอกเลขบัตรประชนให้ครบ13ตัว";
+    } else if (personId.length < 13 || personId.length > 13) {
+      tempError.personId = "กรุณากรอกเลขบัตรประชนให้ครบ13หลัก";
       let valid = false;
     }
     if (!riderFirstname) {

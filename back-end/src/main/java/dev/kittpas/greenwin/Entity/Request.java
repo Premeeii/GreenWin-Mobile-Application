@@ -47,12 +47,15 @@ public class Request {
     @Column(name = "customerImage")
     private String customerImage;
 
+    @Column(name = "description")
+    private String description;
+
     public Request(){
 
     }
 
     public Request(String pickupName1, String pickupName2, String riderLocation, String destination,
-            String username, String fname, String lname, String tel, String imageRequest, String customerImage) {
+            String username, String fname, String lname, String tel, String imageRequest, String customerImage, String description) {
         this.pickupName1 = pickupName1;
         this.pickupName2 = pickupName2;
         this.riderLocation = riderLocation;
@@ -63,6 +66,7 @@ public class Request {
         this.tel = tel;
         this.imageRequest =imageRequest;
         this.customerImage = customerImage;
+        this.description = description;
     }
 
     public Integer getRequestid() {
@@ -151,6 +155,14 @@ public class Request {
 
     public void setCustomerImage(String customerImage) {
         this.customerImage = customerImage;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

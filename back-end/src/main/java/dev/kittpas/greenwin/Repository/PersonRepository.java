@@ -23,6 +23,8 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     // ค้นหาคนตามเบอร์โทรศัพท์ (tel)
     Optional<Person> findByTel(String tel);
+
+    boolean existsByUsername(String username);
 }
 
 

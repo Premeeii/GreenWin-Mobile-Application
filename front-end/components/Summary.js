@@ -214,7 +214,7 @@ export function Summary() {
         >
           <Text style={myStyle.sectionRequset}>เลือกจุดที่ต้องการให้มารับ</Text>
           <Text style={myStyle.contentRequest}>
-            {summary.pickupName1}
+            {summary.pickupName1}, {summary.description}
           </Text>
           <Text style={myStyle.sectionRequset}>
             เลือกจุดให้บริการวินมอเตอร์ไซค์สีเขียว

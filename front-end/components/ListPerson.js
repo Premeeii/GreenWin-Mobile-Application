@@ -37,6 +37,7 @@ export function ListPerson() {
   const [error, setError] = useState({});
   const [callConfirm, setCallConfirm] = useState(false);
   const [logoutConfirm, setLogoutConfirm] = useState(false);
+  const [description, setDescription] = useState("");
 
   const isFocus = useIsFocused(); //ช่วยให้รีเฟรซข้อมูล
   const navigation = useNavigation();
@@ -129,6 +130,7 @@ export function ListPerson() {
           lname: user.lname,
           tel: user.tel,
           customerImage: imageUri,
+          description,
         }),
       });
 
@@ -294,6 +296,8 @@ export function ListPerson() {
           onChange={(item) => {
             setSelectLocation1(item.value);
             setSelectImage(item.imageLocation);
+            setDescription(item.description);
+            
           }}
           renderItem={(
             item //ใส่รูปภาพลงในDropdown

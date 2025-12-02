@@ -62,7 +62,7 @@ export function RiderRegister2() {
   };
 
   const handleRiderRegister = async () => {
-    if(!validate()){
+    if (!validate()) {
       return;
     }
 
@@ -117,6 +117,9 @@ export function RiderRegister2() {
     if (!riderLicense) {
       tempError.riderLicense = "กรุณากรอกเลขใบอนุญาตขับขี่";
       let valid = false;
+    }else if(riderLicense.length < 8 || riderLicense.length > 8){
+      tempError.riderLicense = "โปรดกรอกเลขใบอนุญาตขับขี่ให้ถูกต้อง"
+      let valid = false;
     }
 
     if (!selectLocation) {
@@ -127,20 +130,34 @@ export function RiderRegister2() {
     if (!username) {
       tempError.username = "กรุณากรอกชื่อผู้ใช้งาน";
       let valid = false;
+    }else if(username.length < 5){
+      tempError.username = "โปรดกรอกชื่อผู้ใช้งานอย่างน้อย 5 ตัว"
+      let valid = false;
     }
 
     if (!password) {
       tempError.password = "กรุณากรอกรหัสผ่าน";
+      let valid = false;
+    }else if(password.length < 8 ){
+      tempError.password = "โปรดกรอกรหัสผ่านอย่างน้อย 8 ตัว"
       let valid = false;
     }
 
     if (!email) {
       tempError.email = "กรุณากรอกอีเมลล์";
       let valid = false;
+    } else if (
+      !(email.endsWith("@gmail.com") || email.endsWith("@hotmail.com") || email.endsWith("@yahoo.com"))
+    ) {
+      tempError.email = "โปรดกรอกอีเมลล์ให้ถูกต้อง";
+      valid = false;
     }
 
     if (!tel) {
       tempError.tel = "กรุณากรอกเบอร์โทร";
+      let valid = false;
+    } else if (tel.length < 10 || tel.length > 10) {
+      tempError.tel = "โปรดกรอกเบอร์โทรศัพท์ให้ถูกต้อง";
       let valid = false;
     }
 
@@ -209,13 +226,13 @@ export function RiderRegister2() {
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           รหัสผ่าน
         </Text>
-        
+
         <TextInput
           style={myStyle.inputreg}
           value={password}
           onChangeText={setPassword}
         />
-       <Text style={{ color: "red" }}>{errors.password}</Text>
+        <Text style={{ color: "red" }}>{errors.password}</Text>
 
         <Text style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }}>
           อีเมลล์

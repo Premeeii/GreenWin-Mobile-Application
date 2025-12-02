@@ -62,7 +62,10 @@ public class Summary {
     private String riderImage;
 
     @Column(name = "customerImage")
-    private String customerImage; 
+    private String customerImage;
+
+    @Column(name = "description")
+    private String description;
 
     public Summary() {
 
@@ -205,10 +208,18 @@ public class Summary {
         this.customerImage = customerImage;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Summary(Integer summaryid, String riderUsername, String riderFname, String riderLname, String license,
             String riderTel, String riderLocation, String pickupName1, String pickupName2, String destination,
             String customerUsername, String customerFname, String customerLname, String customerTel, String vehicle,
-            String riderImage, String customerImage) {
+            String riderImage, String customerImage, String description) {
         this.summaryid = summaryid;
         this.riderUsername = riderUsername;
         this.riderFname = riderFname;
@@ -226,8 +237,11 @@ public class Summary {
         this.vehicle = vehicle;
         this.riderImage = riderImage;
         this.customerImage = customerImage;
+        this.description = description;
     }
 
+
+  
     
 
 }
