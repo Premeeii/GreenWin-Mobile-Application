@@ -306,3 +306,8 @@
     <img width="173" height="382" alt="image" src="https://github.com/user-attachments/assets/e388b98e-2b25-4b86-b6da-389521c9da8d" />
 </p>
 
+# การทดลองจากผู้ใช้งาน
+<img width="1774" height="2364" alt="image" src="https://github.com/user-attachments/assets/5b258a7a-48e4-4774-893f-d78a89d653e2" />
+<img width="1774" height="2364" alt="image" src="https://github.com/user-attachments/assets/8c07c09b-91e7-4bb9-838c-028260234a42" />
+
+
